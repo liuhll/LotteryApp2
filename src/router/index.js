@@ -13,8 +13,12 @@ const constantRouterMap = [
     name: 'plan',
     redirect: 'plan',
     children: [{
-      path: 'plan'
+      path: 'plan',
+      component: () => import('@/views/plan/index')
     }] 
+  }, {
+    path: '/',
+    component: () => import('@/views/pointmall/index')
   }
 ];
 
