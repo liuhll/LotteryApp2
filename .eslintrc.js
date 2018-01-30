@@ -57,6 +57,8 @@ module.exports = {
      'eol-last': 0,
      'padded-blocks': 0,
      'no-cond-assign': 0,
-     "comma-dangle": 0
+     "comma-dangle": 0,
+     "no-trailing-spaces": 0,
+     "linebreak-style": 0,
   }
 }
