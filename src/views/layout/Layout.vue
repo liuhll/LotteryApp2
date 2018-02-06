@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <lt-header></lt-header>
-    <app-main></app-main>
+    <app-main class="app-main"></app-main>
     <lt-tabbar></lt-tabbar>
   </div>
 </template>
@@ -31,6 +31,11 @@ html, body,.app-wrapper {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+}
+.app-main {
+  position: absolute;
+  top: 40px;
+  margin-bottom: 100px;
 }
 </style>
 

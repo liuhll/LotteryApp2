@@ -1,12 +1,29 @@
 <template>
   <div class="plan-wrapper">
-      <div>开奖区域</div>
-      <div>功能区域</div>
-      <div>计划追号区域</div>
+      <lottery-run></lottery-run>
+      <lottery-func></lottery-func>
+      <tracking-number></tracking-number>
   </div>
 </template>
 <script>
+import LotteryFunc from './components/lottery-func';
+import LotteryRun from './components/lottery-run';
+import TrackingNumber from './components/tracking-number';
+
 export default {
-  name: 'LtPlan'
+  name: 'LtPlan',
+  components: {
+    LotteryFunc,
+    LotteryRun,
+    TrackingNumber
+  }
 }
 </script>
+
+<style lang="less" scoped>
+.plan-wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+</style>

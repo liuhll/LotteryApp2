@@ -1,5 +1,5 @@
 <template>
-  <section class="app-main">
+  <section>
     <transition name="fade" mode="out-in">
       <!-- <router-view :key="key"></router-view> -->
       <keep-alive>
@@ -15,11 +15,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.app-main {
-  position: absolute;
-  top: 40px;
-}
 .router-view {
     height: 100%;
+   
 }
 </style>
