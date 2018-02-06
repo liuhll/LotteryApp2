@@ -27,7 +27,6 @@ export default {
     width: 100%;
     position: fixed;
     top: 180px;    
-    background-color: red;
     overflow: hidden;
 
 }

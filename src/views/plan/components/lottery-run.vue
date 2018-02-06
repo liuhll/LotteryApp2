@@ -6,7 +6,7 @@
 
 <style lang="less" scoped>
 .lt-run-wrapper {
-    height: 20%;
+    height: 70px;
     width: 100%;
     position: fixed;
     background-color: aqua;
