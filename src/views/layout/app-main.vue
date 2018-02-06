@@ -3,7 +3,7 @@
     <transition name="fade" mode="out-in">
       <!-- <router-view :key="key"></router-view> -->
       <keep-alive>
-          <router-view></router-view>
+          <router-view class="router-view"></router-view>
       </keep-alive>      
     </transition>
   </section>
@@ -14,3 +14,12 @@ export default {
   name: 'AppMain'
 }
 </script>
+<style lang="less" scoped>
+.app-main {
+  position: absolute;
+  top: 40px;
+}
+.router-view {
+    height: 100%;
+}
+</style>

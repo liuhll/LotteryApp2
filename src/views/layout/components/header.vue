@@ -1,7 +1,7 @@
 <template>
-  <div>
-      <x-header :left-options="{showBack: false}" style="background-color:red;">计划</x-header>
-  </div>
+    <x-header :left-options="{showBack: false}" 
+    style="width:100%;position:absolute;left:0;top:0;z-index:100;
+    background-color:#E10601">计划</x-header>
 </template>
 
 <script>
@@ -19,5 +19,6 @@ export default {
 .vux-header {
   height: 40px;
   line-height: 40px;
+   
 }
 </style>
