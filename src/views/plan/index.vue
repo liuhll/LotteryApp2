@@ -16,6 +16,10 @@ export default {
     LotteryFunc,
     LotteryRun,
     TrackingNumber
+  },
+  created() {
+    debugger;
+    this.$vux.toast.show('tes')
   }
 }
 </script>

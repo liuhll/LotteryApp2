@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Toast } from 'vux'
 import { getToken } from '@/utils/auth'
 import store from '../store'
 
@@ -12,11 +11,12 @@ const service = axios.create({
   })
 
 // request拦截器
-service.interceptors.request.use(config => {
+service.interceptors.request.use(
+  config => {
     if (store.getters.token) {
-      config.headers[TokenKey] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers[TokenKey] = getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
     }
-    return config
+    return config;
   }, error => {
     // Do something with request error
     console.log(error) // for debug
@@ -26,6 +26,11 @@ service.interceptors.request.use(config => {
 
 // respone拦截器
 service.interceptors.response.use(
-    response => {
+    response => response,
+    error => { 
+      console.log('err' + error)// for debug
+      this.$vux.toast.show(error)
     }
   )
+
+  export default service  
