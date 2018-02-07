@@ -4,11 +4,13 @@ import Vue from 'vue'
 import { DatetimePlugin, BusPlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin } from 'vux'
 
 import FastClick from 'fastclick'
+import Validator from 'async-validator'
 import App from './App'
 import router from './router'
 import store from './store'
 
 import './permission' 
+
 
 // plugins
 Vue.use(DevicePlugin)
