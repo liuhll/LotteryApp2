@@ -6,6 +6,9 @@ import { DatetimePlugin, BusPlugin, DevicePlugin, ToastPlugin, AlertPlugin, Conf
 import FastClick from 'fastclick'
 import App from './App'
 import router from './router'
+import store from './store'
+
+import './permission' 
 
 // plugins
 Vue.use(DevicePlugin)
@@ -26,6 +29,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

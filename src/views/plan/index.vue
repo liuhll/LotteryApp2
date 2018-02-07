@@ -18,8 +18,6 @@ export default {
     TrackingNumber
   },
   created() {
-    debugger;
-    this.$vux.toast.show('tes')
   }
 }
 </script>
