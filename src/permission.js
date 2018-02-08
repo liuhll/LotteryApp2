@@ -10,11 +10,12 @@ router.beforeEach((to, from, next) => {
         } else {
             next()
         }
-    }
-      /* has no token */
-    if (whiteList.indexOf(to.path) !== -1) {
-        next()
     } else {
-        next('/login') // 否则全部重定向到登录页
+         /* has no token */
+        if (whiteList.indexOf(to.path) !== -1) {
+            next()
+        } else {
+            next('/login') // 否则全部重定向到登录页
+        }
     }
  });

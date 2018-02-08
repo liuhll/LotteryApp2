@@ -41,4 +41,8 @@
     const userNameRegex = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/
     return userNameRegex.test(str) || validateEmail(str) || validatePhone(str);
   }
+
+ export function isNullOrEmpty(str) {
+     return str === null || str === '' || str === undefined;
+ }
   

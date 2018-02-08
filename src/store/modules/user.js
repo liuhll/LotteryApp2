@@ -21,12 +21,16 @@ const user = {
     actions: {
         LoginByUsername({ commit }, userInfo) {
             const username = userInfo.username.trim();
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {               
                 loginByUsername(username, userInfo.password, userInfo.systemType).then(response => {
-                    const data = response.result;
-                    commit('SET_TOKEN', data);
-                    setToken(data);
-                    resolve();
+                    const data = response.data;
+                    if (data.success) {
+                        commit('SET_TOKEN', data.result);
+                        setToken(data.result);
+                        resolve();
+                    } else {
+                        reject(data.error);
+                    }                 
                 }).catch(error => {
                     reject(error);
                 });

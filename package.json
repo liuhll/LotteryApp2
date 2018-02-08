@@ -11,7 +11,6 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "async-validator": "^1.8.2",
     "axios": "^0.17.1",
     "fastclick": "^1.0.6",
     "js-cookie": "^2.2.0",
