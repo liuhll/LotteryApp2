@@ -29,7 +29,6 @@ service.interceptors.response.use(
     response => response,
     error => { 
       console.log('err' + error)// for debug
-      this.$vux.toast.show(error)
     }
   )
 

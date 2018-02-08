@@ -1,9 +1,10 @@
-import { loginByUsername } from '@/api/login'
+import { loginByUsername, getUserInfo } from '@/api/login'
 import { getToken, setToken } from '@/utils/auth'
+import { debug } from 'util';
 
 const user = {
     state: {
-      user: '',
+      userInfo: null,
       status: '',
       token: getToken()
     },
@@ -16,7 +17,10 @@ const user = {
         },
       SET_NAME: (state, name) => {
           state.name = name
-        }  
+        },
+      SET_USERINFO: (state, userInfo) => {
+          state.userInfo = userInfo
+      }  
     },
     actions: {
         LoginByUsername({ commit }, userInfo) {
@@ -35,6 +39,23 @@ const user = {
                     reject(error);
                 });
             });
+        },
+
+        GetUserInfo({ commit, state }) {
+           return new Promise((resolve, reject) => {
+              getUserInfo(state.token).then(response => {
+                 const data = response.data;
+                 debugger;
+                 if (data.success) {
+                    commit('SET_USERINFO', data.result) 
+                    resolve(data);
+                 } else {
+                    reject(data.error);
+                 }
+              }).catch(error => {
+                  reject(error);
+              });
+           });
         }
     }
 }
