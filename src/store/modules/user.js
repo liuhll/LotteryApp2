@@ -1,10 +1,10 @@
 import { loginByUsername, getUserInfo } from '@/api/login'
 import { getToken, setToken } from '@/utils/auth'
-import { debug } from 'util';
 
 const user = {
     state: {
       userInfo: null,
+      lotteryInfo: null,
       status: '',
       token: getToken()
     },
@@ -20,6 +20,9 @@ const user = {
         },
       SET_USERINFO: (state, userInfo) => {
           state.userInfo = userInfo
+      },
+      SET_LOTTERYINFO: (state, lotteryInfo) => {
+          state.lotteryInfo = lotteryInfo
       }  
     },
     actions: {
@@ -27,7 +30,7 @@ const user = {
             const username = userInfo.username.trim();
             return new Promise((resolve, reject) => {               
                 loginByUsername(username, userInfo.password, userInfo.systemType).then(response => {
-                    const data = response.data;
+                    const data = response;
                     if (data.success) {
                         commit('SET_TOKEN', data.result);
                         setToken(data.result);
@@ -44,13 +47,13 @@ const user = {
         GetUserInfo({ commit, state }) {
            return new Promise((resolve, reject) => {
               getUserInfo(state.token).then(response => {
-                 const data = response.data;
-                 debugger;
-                 if (data.success) {
-                    commit('SET_USERINFO', data.result) 
-                    resolve(data);
+                 if (response.success) {
+                     debugger
+                    commit('SET_USERINFO', response.result)
+                    commit('SET_LOTTERYINFO', response.result.lotteryInfo) 
+                    resolve(response);
                  } else {
-                    reject(data.error);
+                    reject(response.error);
                  }
               }).catch(error => {
                   reject(error);

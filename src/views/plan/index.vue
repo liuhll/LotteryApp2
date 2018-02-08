@@ -18,6 +18,7 @@ export default {
     TrackingNumber
   },
   created() {
+    
   }
 }
 </script>

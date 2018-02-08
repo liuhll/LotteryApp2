@@ -1,8 +1,6 @@
 import axios from 'axios'
-import { getToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
 import store from '../store'
-
-const TokenKey = 'Lottery-App-Token'
 
 // 创建axios实例
 const service = axios.create({
@@ -14,7 +12,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.headers[TokenKey] = getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers.common['Authorization'] = getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     return config;
   }, error => {
@@ -26,9 +24,13 @@ service.interceptors.request.use(
 
 // respone拦截器
 service.interceptors.response.use(
-    response => response,
+    response => {
+        const data = response.data;
+        return data;
+    },
     error => { 
       console.log('err' + error)// for debug
+      removeToken()
     }
   )
 
