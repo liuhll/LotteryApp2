@@ -9,6 +9,5 @@
     height: 70px;
     width: 100%;
     position: fixed;
-    background-color: aqua;
 }
 </style>

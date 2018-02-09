@@ -48,7 +48,6 @@ const user = {
            return new Promise((resolve, reject) => {
               getUserInfo(state.token).then(response => {
                  if (response.success) {
-                     debugger
                     commit('SET_USERINFO', response.result)
                     commit('SET_LOTTERYINFO', response.result.lotteryInfo) 
                     resolve(response);
