@@ -21,17 +21,6 @@ export default {
     return {
       finalLotteryData: {}
     }
-  },
-  created() {
-    this.getFinalLotteryData();
-  },
-  methods: {
-    getFinalLotteryData() {     
-      this.$store.dispatch("GetFinallotterydata").then(result => {
-        debugger;
-        return this.finalLotteryData = result;
-      });
-    }
   }
 }
 </script>
