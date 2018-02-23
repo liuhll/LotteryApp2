@@ -1,4 +1,4 @@
-import { getFinallotterydata } from '@/api/lottery'
+import { getFinallotterydata, getPredictDatas } from '@/api/lottery'
 
 const lotteryData = {
    state: {
@@ -27,6 +27,18 @@ const lotteryData = {
                   reject(error);
               });
            });
+       },
+       GetPredictDatas() {
+        return new Promise((resolve, reject) => {
+            getPredictDatas().then(response => {
+                if (response.success) {
+                   const data = response.result;
+                   resolve(data);
+                } else {
+                    reject(response.error);
+                }
+            });
+        });
        }
    }
 }

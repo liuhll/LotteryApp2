@@ -1,8 +1,8 @@
 <template>
   <div class="plan-wrapper">
-      <lottery-run></lottery-run>
+      <lottery-run v-on:lotterydata="predictdatas"></lottery-run>
       <lottery-func></lottery-func>
-      <tracking-number></tracking-number>
+      <tracking-number :predictDatas="predictDatas"></tracking-number>
   </div>
 </template>
 <script>
@@ -19,7 +19,21 @@ export default {
   },
   data() {
     return {
-      finalLotteryData: {}
+      predictDatas: []
+    }
+  },
+  methods: {
+    predictdatas(isNew) {
+      if(!isNew) {
+        this.$vux.loading.show('计算中...');
+      }
+      this.$store.dispatch('GetPredictDatas').then(result => {
+          this.predictDatas = result;
+          this.$vux.loading.hide();
+        }).catch(error => {
+          this.$vux.loading.hide();
+          this.$vux.alert.show(error.message);
+        })
     }
   }
 }

@@ -29,7 +29,7 @@ export default {
   },
   created() {
     this.getFinalLotteryData();
-    
+    this.$emit('lotterydata', true);
   },
   methods: {
     getFinalLotteryData() {
@@ -40,8 +40,9 @@ export default {
         if(result.isLotteryData) {           
             self.remianSeconds = result.remainSeconds;
             self.nextLotteryCountdown();
+            self.$emit('lotterydata', false);
         } else {
-            setTimeout(self.getFinalLotteryData,3000);
+            setTimeout(self.getFinalLotteryData, 3000);
         }        
       });
       }
@@ -52,7 +53,7 @@ export default {
         if (self && !self._isDestroyed) {
             if (self.remianSeconds > 0) {
                 self.remianSeconds = self.remianSeconds - 1;
-                setTimeout(self.nextLotteryCountdown,1000);
+                setTimeout(self.nextLotteryCountdown, 1000);
             } else {
                 self.getFinalLotteryData()
             }
@@ -63,19 +64,18 @@ export default {
   computed: {
     remianTime() {
         if (this.finalLotteryData.isLotteryData) {
-            return convertToTime(this.remianSeconds)
+            return convertToTime(this.remianSeconds);
         } else {
-            return "开奖中..."
+            return '开奖中...';
         }
         
     },
     LotteryNumbers() {    
         if(this.finalLotteryData.data) {        
-          let lotteryDatas = this.finalLotteryData.data.split(',');
+          const lotteryDatas = this.finalLotteryData.data.split(',');
           return lotteryDatas;
-        } else {
-            return [];
-        }
+        } 
+        return [];
     }
   }
   

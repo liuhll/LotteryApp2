@@ -2,7 +2,9 @@
     <div class="tracking-number-wrapper">
       <scroller lock-x @on-scroll="onScroll"  height="100%" ref="scrollerEvent">
       <div class="box2">
-        <p v-for="i in 80">placeholder {{i}}</p>
+        <div v-for="(item,index) in predictDatas">
+          <span>{{item.predictData}}</span>
+        </div>
       </div>
       </scroller>
     </div>
@@ -13,6 +15,11 @@ import { Scroller } from 'vux';
 export default {
   components: {
     Scroller
+  },
+  props: {
+    predictDatas: {
+      type: Array
+    }
   },
   methods: {
     onScroll() {

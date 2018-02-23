@@ -13,3 +13,10 @@ export function getPredictdetailDatas() {
         method: 'GET'
     });
 }
+
+export function getPredictDatas() {
+    return request({
+        url: '/v1/lottery/predictdatas',
+        method: 'GET'
+    });
+}
