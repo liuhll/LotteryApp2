@@ -13,6 +13,6 @@
     width: 100%;
     position: fixed;
     background-color: blue;
-    top: 110px;
+    top: 125px;
 }
 </style>
