@@ -87,8 +87,9 @@ export default {
 .lt-run-wrapper {
     height: 80px;
     width: 100%;
-    margin: 0 5px;
+    padding: 0 5px;
     position: fixed;
+    background-color: #f4f4f4
 }
 
 .lottery-number-area {
