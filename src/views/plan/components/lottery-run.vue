@@ -2,7 +2,7 @@
   <div class="lt-run-wrapper">
     <div class="lottery-cell">第{{finalLotteryData.period}}期开奖结果</div>
     <div class="lottery-number-area">
-        <div> {{finalLotteryData.data}}</div>
+        <lottery-round-number v-for="(item,index) in LotteryNumbers" :lotteryNumber="item"></lottery-round-number>
     </div> 
     <div class="lottery-next-period-wrapper">
        <span class="lottery-cell">距离第{{finalLotteryData.nextPeriod}}开奖剩余:</span>
@@ -67,6 +67,14 @@ export default {
             return "开奖中,请稍等..."
         }
         
+    },
+    LotteryNumbers() {
+        if(this.finalLotteryData.data) {
+            debugger
+          return this.finalLotteryData.data.split();
+        } else {
+            return [];
+        }
     }
   }
   
