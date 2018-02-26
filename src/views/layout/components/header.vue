@@ -1,5 +1,6 @@
 <template>
-    <x-header :left-options="{showBack: false}" 
+    <x-header 
+    :left-options="{showBack: false}" 
     style="width:100%;position:absolute;left:0;top:0;z-index:100;
     background-color:#E10601">计划</x-header>
 </template>

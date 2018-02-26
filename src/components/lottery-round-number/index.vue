@@ -14,12 +14,19 @@ export default {
       lotteryNumber: {
           type: String,
           required: true
+      },
+      numberCount: {
+        type: Number,
+        required: true
       }
   },
   methods: {
     getNumClassIndex(num) {
-       let index = Number(num);
-       return numberClassList[index - 1];
+       const mod = Number(num) % this.numberCount;
+       if (mod === 0) {
+         return numberClassList[this.numberCount - 1];
+       }
+       return numberClassList[mod - 1];
     }
   }
 }

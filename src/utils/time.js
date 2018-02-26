@@ -15,10 +15,10 @@
       hour = '0' + hour; 
    }
    if (minute < 10) {
-       minute = '0' + minute;
+       minute = `0${minute}`;
    }
    if (seconds < 10) {
-    seconds = '0' + seconds;
+    seconds = `0${seconds}`;
    }
    const result = `${hour}:${minute}:${seconds}`
    return result;

@@ -25,6 +25,7 @@
 
 <script>
 import { Grid, GridItem } from 'vux'
+
 export default {
   components: {
     Grid,

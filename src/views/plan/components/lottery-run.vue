@@ -2,7 +2,11 @@
   <div class="lt-run-wrapper">
     <div class="lottery-cell">第{{finalLotteryData.period}}期开奖结果</div>
     <div class="lottery-number-area">
-        <lottery-round-number v-for="(item,index) in LotteryNumbers" :lotteryNumber="item"></lottery-round-number> 
+        <lottery-round-number v-for="(item,index) in LotteryNumbers" 
+        :lotteryNumber="item" 
+        :numberCount="numberCount" 
+        v-bind:key>
+        </lottery-round-number> 
         <div class="clear"></div>
     </div> 
     <div class="lottery-next-period-wrapper">
@@ -33,7 +37,7 @@ export default {
   },
   methods: {
     getFinalLotteryData() {
-      let self = this;
+      const self = this;
       if (self && !self._isDestroyed) {
         self.$store.dispatch('GetFinallotterydata').then(result => {
         self.finalLotteryData = result;    
@@ -49,7 +53,7 @@ export default {
      
     },
     nextLotteryCountdown() {
-        let self = this;
+        const self = this;
         if (self && !self._isDestroyed) {
             if (self.remianSeconds > 0) {
                 self.remianSeconds = self.remianSeconds - 1;
@@ -71,11 +75,14 @@ export default {
         
     },
     LotteryNumbers() {    
-        if(this.finalLotteryData.data) {        
+        if (this.finalLotteryData.data) {        
           const lotteryDatas = this.finalLotteryData.data.split(',');
           return lotteryDatas;
         } 
         return [];
+    },
+    numberCount() {
+       return this.LotteryNumbers.length;
     }
   }
   
