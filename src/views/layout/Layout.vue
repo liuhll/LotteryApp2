@@ -1,8 +1,8 @@
 <template>
   <div class="app-wrapper">
-    <lt-header></lt-header>
+    <lt-header :showBack="showBack"></lt-header>
     <app-main class="app-main"></app-main>
-    <lt-tabbar></lt-tabbar>
+    <lt-tabbar v-show="isShowTabBar()"></lt-tabbar>
   </div>
 </template>
 <script>
@@ -10,6 +10,7 @@ import { ViewBox } from 'vux'
 import LtHeader from './components/header'
 import AppMain from './app-main'
 import LtTabbar from './components/tabbar'
+import { fail } from 'assert';
 
 export default {
   name: 'layout',
@@ -18,6 +19,22 @@ export default {
     LtTabbar,
     AppMain,
     ViewBox
+  },
+  computed: {
+    showBack() {
+      if (this.$route.meta.showBack) {
+        return true;
+      }
+      return false;
+    }
+  },
+  methods: {
+    isShowTabBar() {
+      if (this.$route.meta.showtabbar) {
+        return true;
+      }
+      return false;
+    }
   }
 }
 </script>

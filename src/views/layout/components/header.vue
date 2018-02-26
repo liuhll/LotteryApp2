@@ -1,6 +1,6 @@
 <template>
     <x-header 
-    :left-options="{showBack: false}" 
+    :left-options="{showBack: showBack}" 
     style="width:100%;position:absolute;left:0;top:0;z-index:100;
     background-color:#E10601">计划</x-header>
 </template>
@@ -10,6 +10,11 @@ import { XHeader } from 'vux'
 
 export default {
   name: 'LtHeader',
+  props: {
+    showBack: {
+      type: Boolean
+    }
+  },
   components: {
       XHeader
   }

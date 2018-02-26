@@ -13,7 +13,7 @@
       <grid-item label="数据分析">
         <img slot="icon" src="../../../assets/images/lotteryfunc/analyse.svg">        
       </grid-item>
-      <grid-item label="历史开奖">
+      <grid-item label="历史开奖" link="/history">
         <img slot="icon" src="../../../assets/images/lotteryfunc/lotteryhistroy.svg">        
       </grid-item>
       <grid-item label="购买授权">

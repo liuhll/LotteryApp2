@@ -14,13 +14,30 @@ const constantRouterMap = [
     redirect: 'plan',
     children: [{
         path: 'plan',
-        component: () => import('@/views/plan/index')
+        component: () => import('@/views/plan/index'),
+        meta: {
+          showtabbar: true
+        }
     }, {
         path: 'pointmall',
-        component: () => import('@/views/pointmall/index')
+        component: () => import('@/views/pointmall/index'),
+        meta: {
+          showtabbar: true
+        }
     }, {      
         path: 'me',
-        component: () => import('@/views/me/index')
+        component: () => import('@/views/me/index'),
+        meta: {
+          showtabbar: true
+        }
+      },
+      {
+        path: 'history',
+        component: () => import('@/views/lottery-history/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ] 
   }
