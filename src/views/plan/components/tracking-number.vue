@@ -2,7 +2,7 @@
     <div class="tracking-number-wrapper">
       <scroller lock-x @on-scroll="onScroll"  height="100%" ref="scrollerEvent">
       <div class="box2">
-        <predict-data-item v-for="(item,index) in predictDatas" :trackingData="item">         
+        <predict-data-item v-for="(item,index) in predictDatas" :trackingData="item" :key="index">         
         </predict-data-item>
       </div>
       </scroller>
@@ -36,6 +36,5 @@ export default {
     position: fixed;
     top: 224px;    
     overflow: hidden;
-
 }
 </style>

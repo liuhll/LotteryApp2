@@ -20,3 +20,15 @@ export function getPredictDatas() {
         method: 'GET'
     });
 }
+
+export function getHistory(pageIndex, lotteryTime) {
+    const data = {
+        pageIndex,
+        lotteryTime
+    };
+    return request({
+      url: '/v1/lottery/history',
+      method: 'GET',
+      params: data
+    });
+}

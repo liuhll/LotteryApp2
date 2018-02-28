@@ -20,7 +20,7 @@
            <span class="tranck-period">{{tranckPeriod}}</span>
            <span class="tranck-minor-period">{{trackingData.minorCycle}}</span>
            <span class="prediction-type">{{predictType}}</span>
-           <span class="tranck-number">{{trackingData.predictData}}</span>
+           <span class="tranck-number">{{predictData}}</span>
         </div>
         <div class="clear"></div>
     </div> 
@@ -67,6 +67,9 @@ export default {
     currentScore() {
         const score = this.trackingData.currentScore * 100;
         return `${score}%`
+    },
+    predictData() {
+        return this.trackingData.predictData.replace(/,/g,' ');
     }
   }
 }

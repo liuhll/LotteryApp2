@@ -1,10 +1,11 @@
 <template>
   <section>
     <transition name="fade" mode="out-in">
-      <!-- <router-view :key="key"></router-view> -->
+      <!-- <router-view :key="key"></router-view>
       <keep-alive>
-          <router-view class="router-view"></router-view>
-      </keep-alive>      
+          
+      </keep-alive>       -->
+      <router-view class="router-view"></router-view>
     </transition>
   </section>
 </template>
@@ -16,7 +17,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .router-view {
-    height: 100%;
+  height: 100%;
    
 }
 </style>

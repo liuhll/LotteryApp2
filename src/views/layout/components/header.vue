@@ -1,7 +1,7 @@
 <template>
     <x-header 
     :left-options="{showBack: showBack}" 
-    style="width:100%;position:absolute;left:0;top:0;z-index:100;
+    style="width:100%;position:fixed;left:0;top:0;z-index:100;
     background-color:#E10601">计划</x-header>
 </template>
 

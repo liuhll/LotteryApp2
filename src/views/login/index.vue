@@ -73,8 +73,8 @@ export default {
             this.canUsable = true;
             return;
        }
-       let usernameValid = this.$refs.username.valid
-       let pwdValid = this.$refs.pwd.valid
+       const usernameValid = this.$refs.username.valid
+       const pwdValid = this.$refs.pwd.valid
        if (usernameValid && pwdValid) {
             this.canUsable = false;
        } else {
