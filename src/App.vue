@@ -12,5 +12,6 @@ export default {
 
 <style lang="less">
 @import '~vux/src/styles/reset.less';
+@import './assets/styles/lottery-datetime.less';
 </style>
 

@@ -40,10 +40,9 @@ const lotteryData = {
             });
         });
        },
-       GetHistory({ }, pageIndex, lotteryTime) {
+       GetHistory({ }, histroyParams) {
           return new Promise((resolve, reject) => {
-           
-              getHistory(pageIndex, lotteryTime).then(response => {
+              getHistory(histroyParams.pageIndex, histroyParams.lotteryTime).then(response => {
                   if (response.success) {
                     const data = response.result;
                     resolve(data);

@@ -1,6 +1,6 @@
 <template>
   <div class="lottery-history-wrapper">
-    <history-option></history-option>
+    <history-option v-on:change-lotterydate="changeLotteryDate"></history-option>
     <div class="lottery-history-container">
       <scroller lock-x height="600px"
        @on-scroll="onScroll"
@@ -37,14 +37,15 @@ export default {
       lotteryData: [],
       scrollTop: 0,
       onFetching: false,
-      currentPage: 1
+      currentPage: 1,
+      lotteryTime: null
     }
   },
   created() {
    
   },
   mounted () {
-    this.getLotteryHistory(this.currentPage ,null);
+    this.getLotteryHistory(this.currentPage ,this.lotteryTime);
     this.$nextTick(() => {
       this.$refs.scroller.reset({top: 0})
     })
@@ -61,12 +62,16 @@ export default {
           setTimeout(() => {
             if(this.lotteryHistory.hasNextPage) {
               this.currentPage +=1;
-              this.$store.dispatch('GetHistory', this.currentPage, null).then(result => {
+              const historyParams = { pageIndex: this.currentPage, historyParams:this.lotteryTime}
+              this.$store.dispatch('GetHistory', historyParams).then(result => {
               this.lotteryHistory = result;
               this.lotteryData.push.apply(this.lotteryData,result.data);
             });
             this.$nextTick(() => {
-             this.$refs.scroller.reset()
+              if (this.$refs.scroller)
+              {
+                this.$refs.scroller.reset();
+              }
             })
            }            
        
@@ -76,11 +81,23 @@ export default {
       }
     },
     getLotteryHistory(pageIndex,lotteryTime) {
-      this.$store.dispatch('GetHistory', pageIndex, lotteryTime).then(result => {
+        const historyParams = { pageIndex: this.currentPage ,lotteryTime: lotteryTime}
+        this.$store.dispatch('GetHistory', historyParams).then(result => {
         this.lotteryHistory = result;
         this.lotteryData.push.apply(this.lotteryData,result.data);
       });
+    },
+    changeLotteryDate(lotteryTime) {
+      this.currentPage = 1; 
+      this.lotteryTime = lotteryTime; 
+      this.lotteryData = [];
+     
+      this.getLotteryHistory(this.currentPage,this.lotteryTime);
+      this.$nextTick(() => {
+        this.$refs.scroller.reset({top: 0})
+      })
     }
+    
   }
 }
 </script>
