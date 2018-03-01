@@ -7,8 +7,8 @@
        @on-scroll-bottom="onScrollBottom"
        ref="scroller">
         <div class="box">
-          <lottery-history-item v-for="(item,index) in lotteryData" 
-          :lotteryData="item" 
+          <lottery-history-item v-for="(item,index) in lotteryData"
+          :lotteryData="item"
           :key="index"
           :scroll-bottom-offst="200">
           </lottery-history-item>
@@ -42,7 +42,7 @@ export default {
     }
   },
   created() {
-   
+
   },
   mounted () {
     this.getLotteryHistory(this.currentPage ,this.lotteryTime);
@@ -57,7 +57,7 @@ export default {
     onScrollBottom () {
        if (this.onFetching) {
         // do nothing
-      } else { 
+      } else {
         this.onFetching = true;
           setTimeout(() => {
             if(this.lotteryHistory.hasNextPage) {
@@ -73,11 +73,11 @@ export default {
                 this.$refs.scroller.reset();
               }
             })
-           }            
-       
+           }
+
           this.onFetching = false
           }, 2000);
-          
+
       }
     },
     getLotteryHistory(pageIndex,lotteryTime) {
@@ -88,32 +88,34 @@ export default {
       });
     },
     changeLotteryDate(lotteryTime) {
-      this.currentPage = 1; 
-      this.lotteryTime = lotteryTime; 
+      this.currentPage = 1;
+      this.lotteryTime = lotteryTime;
       this.lotteryData = [];
-     
+
       this.getLotteryHistory(this.currentPage,this.lotteryTime);
       this.$nextTick(() => {
         this.$refs.scroller.reset({top: 0})
       })
     }
-    
+
   }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .app-main {
   margin-bottom:10px;
+  width: 100%;
 }
 .lottery-history-wrapper {
   position:relative;
   top: 28px;
+
 }
 
 .lottery-number-area {
-    width: 100%; 
-    padding: 2px 0 0 8px;
-    background-color: #f4f4f4
+  padding: 2px 0 0 8px;
+  background-color: #f4f4f4
 }
+
 </style>
