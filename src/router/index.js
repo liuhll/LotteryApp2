@@ -38,9 +38,20 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'predictdetail',
+        path: '/predictdetail/:normId',
+        component: () => import('@/views/predict-detail/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
+     
     ] 
-  }
+  },
+  
 ];
 
 export default new Router({

@@ -32,3 +32,10 @@ export function getHistory(pageIndex, lotteryTime) {
       params: data
     });
 }
+
+export function getPredictDetailDatas() {
+    return request({
+        url: '/v1/lottery/predictdetaildatas',
+        method: 'GET'
+    });
+}

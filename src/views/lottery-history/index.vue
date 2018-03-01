@@ -74,7 +74,6 @@ export default {
               }
             })
            }
-
           this.onFetching = false
           }, 2000);
 

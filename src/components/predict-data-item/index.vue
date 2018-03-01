@@ -22,6 +22,10 @@
            <span class="prediction-type">{{predictType}}</span>
            <span class="tranck-number">{{predictData}}</span>
         </div>
+        <div class="track-plan-option trank-second-right">
+          <span>数据</span>
+          <span @click="planDetail()">详情</span>
+        </div>
         <div class="clear"></div>
     </div> 
 </cell-box>
@@ -48,6 +52,9 @@ export default {
             return 'right';
         }
         return 'error';
+    },
+    planDetail() {
+      this.$router.push({ name: 'predictdetail', params: { normId: this.trackingData.normId }});
     }
   },
   computed: {
@@ -177,6 +184,29 @@ export default {
   font-size :14px;
   color :#00e3e3;
   line-height :25px;
+}
+
+.trank-row .trank-second-right {
+    float: right;
+    margin-right: 15px;
+}
+
+.trank-row .trank-second-right span {
+    width :50px;
+    height :20px;
+    display :inline-block;
+    line-height :20px;
+    vertical-align: middle;
+    border-radius :20px;
+    background-color :#EA0000;
+    text-align :center;
+    margin-left :5px;
+    font-size :12px;
+    color :#fff;
+}
+.trank-row .trank-second-right span:active {
+    background-color :#AE0000;
+    color :#ffff37;
 }
     
 .clear {
