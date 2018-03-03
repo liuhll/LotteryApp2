@@ -25,7 +25,8 @@ export default {
   data() {
       return {
         finalLotteryData: {},
-        remianSeconds: 0
+        remianSeconds: 0,
+        countdownTimeOut: null
       }
   },
   components: {
@@ -34,19 +35,29 @@ export default {
   created() {
     this.getFinalLotteryData();
     this.$emit('lotterydata', true);
+    document.addEventListener('visibilitychange',this.onVisibilityChange)
   },
   methods: {
-    getFinalLotteryData() {
+    getFinalLotteryData(needClearCountdownTimeOut) {  
       const self = this;
       if (self && !self._isDestroyed) {
         self.$store.dispatch('GetFinallotterydata').then(result => {
         self.finalLotteryData = result;    
         if(result.isLotteryData) {           
-            self.remianSeconds = result.remainSeconds;
+            self.remianSeconds = result.remainSeconds;       
+            if (needClearCountdownTimeOut && self.countdownTimeOut) {
+               self.$emit('lotterydata', true); 
+               clearTimeout(self.countdownTimeOut);
+               return;
+            }
             self.nextLotteryCountdown();
             self.$emit('lotterydata', false);
         } else {
-            setTimeout(self.getFinalLotteryData, 3000);
+           setTimeout(self.getFinalLotteryData, 3000,needClearCountdownTimeOut);
+           if (needClearCountdownTimeOut && self.countdownTimeOut) {
+              clearTimeout(self.countdownTimeOut);
+              return;
+           }
         }        
       });
       }
@@ -57,12 +68,15 @@ export default {
         if (self && !self._isDestroyed) {
             if (self.remianSeconds > 0) {
                 self.remianSeconds = self.remianSeconds - 1;
-                setTimeout(self.nextLotteryCountdown, 1000);
+                this.countdownTimeOut = setTimeout(self.nextLotteryCountdown, 1000);
             } else {
                 self.getFinalLotteryData()
             }
             
         }
+    },
+    onVisibilityChange() {
+        this.getFinalLotteryData(true);
     }
   },
   computed: {
