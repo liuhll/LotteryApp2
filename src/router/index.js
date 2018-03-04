@@ -47,6 +47,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'chiceplan',
+        path: 'chiceplan',
+        component: () => import('@/views/choice-plan/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
      
     ] 

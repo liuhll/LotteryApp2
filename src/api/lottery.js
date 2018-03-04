@@ -47,3 +47,10 @@ export function getPredictDetailData(normId) {
         params: { normId }
     });
 }
+
+export function getUserPlans() {
+    return request({
+        url: '/v1/plan/userplans',
+        method: 'GET'
+    });
+}

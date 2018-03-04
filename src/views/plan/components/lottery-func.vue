@@ -1,7 +1,7 @@
 <template>
   <div class="lt-func-wrapper">  
     <grid :rows='2' :cols='5'>
-      <grid-item label="选择计划">  
+      <grid-item label="选择计划" link="/chiceplan">  
        <img slot="icon" src="../../../assets/images/lotteryfunc/plan.svg">
       </grid-item>
       <grid-item label="切换公式">
