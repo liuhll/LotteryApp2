@@ -39,3 +39,11 @@ export function getPredictDetailDatas() {
         method: 'GET'
     });
 }
+
+export function getPredictDetailData(normId) {
+    return request({
+        url: '/v1/lottery/predictdetaildata',
+        method: 'GET',
+        params: { normId }
+    });
+}

@@ -16,8 +16,8 @@
           :numberCount="numberCount" 
           v-bind:key>
           </lottery-round-number> 
-        <div class="clear"></div>
-    </div> 
+          <div class="clear"></div>
+        </div> 
   </div>
 </template>
 

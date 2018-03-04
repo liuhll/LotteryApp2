@@ -121,10 +121,10 @@ export default {
 }
 
 .right {
-    background: green;
+    background: #37AF83;
 }
 .error {
-    background: red;
+    background: #EA0000;
 }
 
 .trank-row .trank-first-left {

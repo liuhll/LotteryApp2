@@ -8,9 +8,11 @@
           {{item.planName}}
         </tab-item>
     </tab> 
-    <swiper v-model="index" style="height:100%" :show-dots="false">
-        <swiper-item v-for="(item, index) in predictDetailDatas" :key="index">
-          <div class="tab-swiper vux-center">{{item.planName}} Container</div>
+    <swiper v-model="index" :show-dots="false" :height="height">
+        <swiper-item v-for="(item, index) in predictDetailDatas" :key="index" class="tab-swiper-container">
+          <div class="tab-swiper vux-center">
+            <predict-detail-item :predictDetailData="item"></predict-detail-item>
+          </div>          
         </swiper-item>
     </swiper>
   </div>
@@ -18,22 +20,28 @@
 
 <script>
 import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
+import PredictDetailItem from './components/predict-detail-item'
+
 export default {
   components: {
       Tab,
       TabItem,
       Swiper,
-      SwiperItem
+      SwiperItem,
+      PredictDetailItem     
   },
   data() {
       return {
           predictDetailDatas: [],
           selectedNormId: '',
-          index: 0
+          index: 0,
+          height: '600px'
       }
   },
   created() {
      this.getPredictDetailDatas();
+     const h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+     this.height = (h - 95) + 'px';
   },
   methods: {
       getPredictDetailDatas() {
@@ -56,8 +64,17 @@ export default {
   margin-bottom:10px;
   width: 100%;
 }
+
+.tab-swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
 .tab-swiper {
   background-color: #fff;
-  height: 100px;
+}
+.lottery-number-area {
+  padding: 2px 0 0 8px;
+  background-color: #f4f4f4
 }
 </style>

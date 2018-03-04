@@ -68,7 +68,7 @@ export default {
         if (self && !self._isDestroyed) {
             if (self.remianSeconds > 0) {
                 self.remianSeconds = self.remianSeconds - 1;
-                this.countdownTimeOut = setTimeout(self.nextLotteryCountdown, 1000);
+                self.countdownTimeOut = setTimeout(self.nextLotteryCountdown, 1000);
             } else {
                 self.getFinalLotteryData()
             }
