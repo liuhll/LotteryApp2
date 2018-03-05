@@ -1,6 +1,6 @@
 <template>
   <div class="choice-plan-container">
-      <user-plans :userPlans="userPlans" ref="userplans" v-on:onRemoveSelectPlan="removeSelectPlan"></user-plans>
+      <user-plans ref="userplans" v-on:onRemoveSelectPlan="removeSelectPlan"></user-plans>
       <all-plans :allPlans="allPlans"></all-plans>
   </div>
 </template>
@@ -15,18 +15,16 @@ export default {
   },
   data() {
       return {
-          allPlans: [],
-          userPlans: []
+          allPlans: []
       }
   },
   created() {
       this.$store.dispatch('GetUserPlans').then(result => {
-        this.userPlans = result.userSelectedPlanInfos;
         this.allPlans = result.allPlanInfos;
       });
   },
   methods: {
-    removeSelectPlan(planItem,isInit) {
+    removeSelectPlan(planItem) {
       for(let groupIndex in this.allPlans) {
           let planInfos = this.allPlans[groupIndex].planInfos;
           for(let planIndex in planInfos) {
@@ -36,8 +34,7 @@ export default {
               break;
           }
         }
-      }
-      
+      }      
     }
   }
 }

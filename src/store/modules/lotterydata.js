@@ -10,11 +10,15 @@ import {
 const lotteryData = {
    state: {
      finalLotteryData: { },
-     historyData: { }
+     historyData: { },
+     selectPlans: { }
    },
    mutations: {
        SET_FINALLOTTERYDATA: (state, finalLotteryData) => {
            state.finalLotteryData = finalLotteryData;
+       },
+       SET_SELECT_PLANS: (state, selectPlans) => {
+           state.selectPlans = selectPlans;
        }
    },
    actions: {
@@ -84,11 +88,13 @@ const lotteryData = {
             });
         }); 
        },
-       GetUserPlans() {
+       GetUserPlans({ commit }) {
            return new Promise((resolve, reject) => {
               getUserPlans().then(response => {
                   if (response.success) {
                       const data = response.result;
+                      const selectPlans =  data.userSelectedPlanInfos;
+                      commit('SET_SELECT_PLANS', selectPlans);
                       resolve(data)
                   } else {
                       reject(response.error)

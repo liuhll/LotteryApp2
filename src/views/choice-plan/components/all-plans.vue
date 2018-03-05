@@ -6,6 +6,7 @@
         <plan-group v-for="(item,index) in allPlans" 
         :key="index" 
         :planGroup="item"
+        v-on:adjustHeight="adjustHeight"
         >
         </plan-group>
       </div>
@@ -33,13 +34,15 @@ export default {
     }
   },
   methods: {
-    
+    adjustHeight() {
+      const h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      const userPlanHeight = this.$parent.$refs.userplans.$el.clientHeight;
+      let h1 = h - userPlanHeight - 95;
+      this.height = h1 + 'px'
+    }
   },
   mounted() {
-     const h =window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-     const userPlanHeight = this.$parent.$refs.userplans.$el.clientHeight;
-     let h1 = h - userPlanHeight - 30;
-     h1 = this.height + 'px'
+     this.adjustHeight();
   }
 }
 </script>

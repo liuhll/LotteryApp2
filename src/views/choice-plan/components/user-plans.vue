@@ -26,22 +26,31 @@
 <script>
 import { Checker, CheckerItem } from 'vux'
 export default {
-  props: {
-      userPlans: {
-          type: Array,
-          default: []
-      }
-  },
   components: {
       Checker,
       CheckerItem
   },
+  data() {
+      return {
+        
+      }
+  },
   methods: {
       userPlanChange(value) {
       },
-      userPlanItemClick(itemValue,itemDisabled) {
+      userPlanItemClick(itemValue) {
         itemValue.isSelected = false;
         this.$emit('onRemoveSelectPlan',itemValue);
+      }
+  },
+  computed: {
+      userPlans: {
+        get() {
+            return this.$store.state.lotterydata.selectPlans;
+        },
+        set(value) {
+            // donothing
+        }
       }
   }
 

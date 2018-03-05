@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import * as  _ from 'lodash' 
 import { Checker, CheckerItem } from 'vux'
 import { fail } from 'assert';
 export default {
@@ -57,10 +58,18 @@ export default {
     planItemClick(item) {
       if(item.isSelected) {
         item.isSelected = false;
+        const removeItem = this.$store.state.lotterydata.selectPlans.find(n => n.id === item.id);
+        removeItem.isSelected = false;
+        var index = this.$store.state.lotterydata.selectPlans.indexOf(removeItem);
+        if (index > -1) {
+          this.$store.state.lotterydata.selectPlans.splice(index,1);
+        }
+
       }else {
-         item.isSelected = true;
+        this.$store.state.lotterydata.selectPlans.push(item)
+        item.isSelected = true;
       }
-     
+      this.$emit('adjustHeight')
     }
   }
 }
