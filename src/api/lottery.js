@@ -56,7 +56,6 @@ export function getUserPlans() {
 }
 
 export function updateUserPlans(selectPlans) {
-    debugger
     return request({
         url: '/v1/plan/userplans',
         method: 'PUT',

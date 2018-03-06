@@ -60,9 +60,31 @@ export default {
       });
       this.$store.dispatch('UpdateUserPlans', planIds).then( result => {
         const _this = this;
-        this.$vux.alert.show(result)
         this.$vux.loading.hide()
-        this.$router.push({ path: 'plan' })
+        this.$vux.confirm.prompt(result, {
+          onCancel() {
+
+          },
+          onConfirm() {
+            this.$router.push({ path: 'plan' })
+          }
+        })
+        
+        
+      }).catch(error => {
+        const _this = this;
+        this.$vux.loading.hide()
+        this.$vux.confirm.show({
+         title: '修改计划',
+         content: error.message + ',是否需要购买授权？',
+         onConfirm() {            
+           //_this.$router.push({ path: 'plan' })
+         },
+         onCancel() {
+           _this.$router.push({ path: 'plan' })
+         }
+        })
+        
       });
     }
   },

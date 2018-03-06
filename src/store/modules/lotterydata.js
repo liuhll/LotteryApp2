@@ -105,9 +105,7 @@ const lotteryData = {
        },
        UpdateUserPlans({ }, planIds) {
           return new Promise((resolve, reject) => {
-            debugger
             updateUserPlans(planIds).then(response => {
-                debugger
                 if (response.success) {
                     const data = response.result;
                     resolve(data)
