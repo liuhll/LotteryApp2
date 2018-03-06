@@ -54,7 +54,16 @@ const constantRouterMap = [
         component: () => import('@/views/choice-plan/index'),
         meta: {
           showtabbar: false,
-          showBack: true
+          showBack: true,
+          more: {
+            show: true,
+            type: 'img',
+            imgUrl: require('@/assets/images/submit.svg'),
+            context: '提交',
+            event: {
+              func: 'submitPlans'
+            }
+          }
         }
       }
      

@@ -4,7 +4,8 @@ import {
     getHistory,
     getPredictDetailDatas, 
     getPredictDetailData,
-    getUserPlans
+    getUserPlans,
+    updateUserPlans
     } from '@/api/lottery'
 
 const lotteryData = {
@@ -93,12 +94,26 @@ const lotteryData = {
               getUserPlans().then(response => {
                   if (response.success) {
                       const data = response.result;
-                      const selectPlans =  data.userSelectedPlanInfos;
+                      const selectPlans = data.userSelectedPlanInfos;
                       commit('SET_SELECT_PLANS', selectPlans);
                       resolve(data)
                   } else {
                       reject(response.error)
                   }
+              })
+           });
+       },
+       UpdateUserPlans({ }, planIds) {
+          return new Promise((resolve, reject) => {
+            debugger
+            updateUserPlans(planIds).then(response => {
+                debugger
+                if (response.success) {
+                    const data = response.result;
+                    resolve(data)
+                } else {
+                    reject(response.error)
+                }
               })
            });
        }

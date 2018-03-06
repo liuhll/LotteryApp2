@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper">
-    <lt-header :showBack="showBack"></lt-header>
+    <lt-header :showBack="showBack" :more="more"></lt-header>
     <app-main class="app-main"></app-main>
     <lt-tabbar v-show="isShowTabBar()"></lt-tabbar>
   </div>
@@ -22,10 +22,16 @@ export default {
   },
   computed: {
     showBack() {
-      if (this.$route.meta.showBack) {
+      if (this.$route.meta.showBack === true) {
         return true;
       }
       return false;
+    },
+    more() {
+      if (this.$route.meta.more) {
+        return this.$route.meta.more;
+      }
+      return {};
     }
   },
   methods: {

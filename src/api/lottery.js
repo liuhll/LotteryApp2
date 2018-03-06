@@ -54,3 +54,12 @@ export function getUserPlans() {
         method: 'GET'
     });
 }
+
+export function updateUserPlans(selectPlans) {
+    debugger
+    return request({
+        url: '/v1/plan/userplans',
+        method: 'PUT',
+        data: { planIds: selectPlans }
+    });
+}

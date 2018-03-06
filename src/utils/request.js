@@ -5,7 +5,7 @@ import store from '../store'
 // 创建axios实例
 const service = axios.create({
     baseURL: process.env.BASE_API, // api的base_url
-    timeout: 15000 // 请求超时时间
+    timeout: 100000 // 请求超时时间
   })
 
 // request拦截器
@@ -29,8 +29,10 @@ service.interceptors.response.use(
         return data;
     },
     error => { 
-      console.log('err' + error)// for debug
-      removeToken()
+      console.log('err:' + error)// for debug
+      if (error.unAuthorizedRequest) {
+        removeToken()
+      }
     }
   )
 
