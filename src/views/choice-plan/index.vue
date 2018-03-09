@@ -34,7 +34,7 @@ export default {
               break;
           }
         }
-      }      
+      }
     }
   }
 }
@@ -60,4 +60,23 @@ export default {
   background: #ffffff url(../../assets/images/checker/active.png) no-repeat right bottom;
   border-color: #ff4a00;
 }
+.select-plan-text {
+  background-color:#FECCCB;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 5px 10px;
+  font-weight: 600;
+  color: #333333;
+
+}
+
+.vux-checker-box {
+  padding: 0px 5px;
+}
+
+.vux-checker-item {
+  margin: 2px 3px;
+  font-size: 12px;
+}
+
 </style>

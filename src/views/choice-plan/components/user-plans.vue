@@ -1,21 +1,21 @@
 <template>
   <div class="userplan-container">
       <div class="user-plan-row">
-          <div>已选计划</div>
+          <div class="select-plan-text">已选计划</div>
           <div class="delete-all-plan"></div>
       </div>
-      <checker 
+      <checker
       type="checkbox"
       v-model="userPlans"
       default-item-class="plan-item"
       selected-item-class="plan-item-selected"
       @on-change="userPlanChange"
       >
-        <checker-item 
-        v-for="(item,index) in userPlans" 
+        <checker-item
+        v-for="(item,index) in userPlans"
         :key="index"
         :value="item"
-        @on-item-click="userPlanItemClick"              
+        @on-item-click="userPlanItemClick"
         >
         {{item.planName}}
         </checker-item>
@@ -32,7 +32,7 @@ export default {
   },
   data() {
       return {
-        
+
       }
   },
   methods: {
@@ -58,5 +58,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.userplan-container {
+  margin: 5px 0 5px 0;
+}
+.user-plan-row {
+  margin-bottom: 3px;
+}
+
 
 </style>

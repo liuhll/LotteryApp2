@@ -1,10 +1,10 @@
 <template>
-  <div class="allplan-container">
-    <div>所有计划</div>
+  <div class="allplan-container ">
+    <div class="select-plan-text">所有计划</div>
     <scroller lock-x :height="height">
       <div class="box">
-        <plan-group v-for="(item,index) in allPlans" 
-        :key="index" 
+        <plan-group v-for="(item,index) in allPlans"
+        :key="index"
         :planGroup="item"
         v-on:adjustHeight="adjustHeight"
         >

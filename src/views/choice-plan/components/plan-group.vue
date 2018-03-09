@@ -8,11 +8,11 @@
        default-item-class="plan-item"
        selected-item-class="plan-item-selected"
        >
-        <checker-item 
+        <checker-item
         v-for="(item,index) in planInfos"
         :key="index"
         :value="item"
-        @on-item-click="planItemClick"     
+        @on-item-click="planItemClick"
         >
         {{item.planName}}
         </checker-item>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import * as  _ from 'lodash' 
+import * as  _ from 'lodash'
 import { Checker, CheckerItem } from 'vux'
 import { fail } from 'assert';
 export default {
@@ -74,3 +74,14 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.group-title {
+  font: 500;
+  font-size: 14px;
+  color: #ff4a00;
+  height: 16px;
+  line-height: 16px;
+  padding: 5px 10px;
+}
+</style>
