@@ -7,8 +7,8 @@ Vue.use(Router)
 
 const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { 
-    path: '/', 
+  {
+    path: '/',
     component: Layout,
     name: 'appmain',
     redirect: 'plan',
@@ -24,7 +24,7 @@ const constantRouterMap = [
         meta: {
           showtabbar: true
         }
-    }, {      
+    }, {
         path: 'me',
         component: () => import('@/views/me/index'),
         meta: {
@@ -65,11 +65,20 @@ const constantRouterMap = [
             }
           }
         }
+      },
+      {
+        name: 'basicnorm',
+        path: 'basicnorm',
+        component: () => import('@/views/basicnorm/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
-     
-    ] 
+
+    ]
   },
-  
+
 ];
 
 export default new Router({
