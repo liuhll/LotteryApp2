@@ -62,3 +62,10 @@ export function updateUserPlans(selectPlans) {
         data: { planIds: selectPlans }
     });
 }
+
+export function getUserNromDefaultConfig() {
+    return request({
+        url: '/v1/norm/usernormdefaultconfig',
+        method: 'GET'
+    })
+}

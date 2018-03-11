@@ -5,7 +5,8 @@ import {
     getPredictDetailDatas, 
     getPredictDetailData,
     getUserPlans,
-    updateUserPlans
+    updateUserPlans,
+    getUserNromDefaultConfig
     } from '@/api/lottery'
 
 const lotteryData = {
@@ -114,6 +115,18 @@ const lotteryData = {
                 }
               })
            });
+       },
+       GetUserNromDefaultConfig() {
+        return new Promise((resolve, reject) => {
+            getUserNromDefaultConfig().then(response => {
+                if (response.success) {
+                    const data = response.result;
+                    resolve(data)
+                } else {
+                    reject(response.error)
+                }
+              })
+           }); 
        }
    }
 }
