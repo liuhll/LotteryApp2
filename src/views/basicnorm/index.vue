@@ -27,7 +27,7 @@
       </cell-box>
    </group>
     <box gap="10px 10px">
-      <x-button type="primary" action-type="button">保存</x-button>
+      <x-button type="primary" action-type="button"  @click.native="saveBasicNorm()">保存</x-button>
     </box>
   </div>
 </template>
@@ -105,6 +105,25 @@ export default {
         this.forecastCount = result.forecastCount;
         this.unitHistoryCount = result.unitHistoryCount;
         this.lookupPeriodCount = result.lookupPeriodCount;
+      });
+    },
+    saveBasicNorm() {
+      let basicNorm = {
+        forecastCount: this.forecastCount,
+        planCycle: this.planCycle,
+        unitHistoryCount: this.unitHistoryCount,
+        minRightSeries: this.rightSilder.value[0],
+        maxRightSeries: this.rightSilder.value[1],
+        minErrortSeries: this.errorSilder.value[0],
+        maxErrortSeries: this.errorSilder.value[1],
+        lookupPeriodCount: this.lookupPeriodCount,
+        expectMinScore: this.expectScoreSilder.value[0],
+        expectMaxScore: this.expectScoreSilder.value[1]
+      };
+      this.$store.dispatch("UpdateUserNromDefaultConfig", basicNorm).then(result => { 
+         debugger
+      }).catch(error => {
+        
       });
     }
   }

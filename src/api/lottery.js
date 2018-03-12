@@ -69,3 +69,11 @@ export function getUserNromDefaultConfig() {
         method: 'GET'
     })
 }
+
+export function updateUserNromDefaultConfig(basicNorm) {
+    return request({
+        url: '/v1/norm/usernormdefaultconfig',
+        method: 'PUT',
+        data: basicNorm
+    })
+}
