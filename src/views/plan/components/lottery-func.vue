@@ -1,6 +1,6 @@
 <template>
   <div class="lt-func-wrapper">
-    <grid :rows='2' :cols='5'>
+    <grid :cols='5'>
       <grid-item label="选择计划" link="/chiceplan">
        <img slot="icon" src="../../../assets/images/lotteryfunc/plan.svg">
       </grid-item>
@@ -10,7 +10,7 @@
       <grid-item label="基础指标" link="/basicnorm">
         <img slot="icon" src="../../../assets/images/lotteryfunc/norm.svg">
       </grid-item>
-      <grid-item label="数据分析">
+      <grid-item label="数据分析" link="/dataanalyse">
         <img slot="icon" src="../../../assets/images/lotteryfunc/analyse.svg">
       </grid-item>
       <grid-item label="历史开奖" link="/history">

@@ -74,6 +74,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      }, 
+      {
+        name: 'dataanalyse',
+        path: 'dataanalyse',
+        component: () => import('@/views/data-analyse/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
 
     ]
