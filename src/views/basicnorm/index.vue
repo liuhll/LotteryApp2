@@ -120,10 +120,31 @@ export default {
         expectMinScore: this.expectScoreSilder.value[0],
         expectMaxScore: this.expectScoreSilder.value[1]
       };
+      this.$vux.loading.show('修改中...');
       this.$store.dispatch("UpdateUserNromDefaultConfig", basicNorm).then(result => { 
-         debugger
+        const _this = this;
+        this.$vux.loading.hide()
+        this.$vux.confirm.prompt(result, {
+          onCancel() {
+
+          },
+          onConfirm() {
+            this.$router.push({ path: 'plan' })
+          }
+        })
       }).catch(error => {
-        
+        const _this = this;
+        this.$vux.loading.hide();
+        this.$vux.confirm.show({
+         title: '修改基础指标',
+         content: error.message + ',是否需要购买授权？',
+         onConfirm() {            
+           //_this.$router.push({ path: 'plan' })
+         },
+         onCancel() {
+           _this.$router.push({ path: 'plan' })
+         }
+        })
       });
     }
   }
