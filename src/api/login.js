@@ -20,3 +20,10 @@ export function getUserInfo (token) {
       token
   });
 }
+
+export function logout() {
+  return request({
+    url: '/account/logout',
+    method: 'POST'
+  });
+} 

@@ -1,5 +1,13 @@
-import { loginByUsername, getUserInfo } from '@/api/login'
-import { getToken, setToken } from '@/utils/auth'
+import { 
+    loginByUsername,
+    getUserInfo,
+    logout
+} from '@/api/login'
+import { 
+    getToken,
+    setToken,
+    removeToken
+ } from '@/utils/auth'
 
 const user = {
     state: {
@@ -58,6 +66,20 @@ const user = {
                   reject(error);
               });
            });
+        },
+        Logout({ commit }) {
+          return new Promise((resolve, reject) => {
+             logout().then(response => {
+                const data = response;
+                if (data.success) {
+                    commit('SET_TOKEN', null);
+                    removeToken();
+                    resolve(data.result);
+                }
+             }).catch(error => {
+                 reject(error)
+             });
+          });
         }
     }
 }

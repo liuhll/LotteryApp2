@@ -42,20 +42,41 @@
         关于我们
       </cell-box>
       <cell-box>
+        在线帮助
+      </cell-box>
+      <cell-box>
         检查更新
+      </cell-box>
+      <cell-box>
+        <div slot="default" class="logout-wrapper">
+          <x-button type="primary" action-type="button" class="logout-btn"  @click.native="logout()">退出登录</x-button>
+        </div>
       </cell-box>
     </grid>
   </div>
 </template>
 
 <script>
-import { Grid, GridItem, CellBox } from 'vux'
+import { Grid, GridItem, CellBox, XButton } from 'vux'
 
 export default {
   components: {
     Grid,
     GridItem,
-    CellBox
+    CellBox,
+    XButton
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('Logout').then(result => {
+        this.lotteryHistory = result;
+        this.$vux.alert.show(result);
+        setTimeout(()=> {
+          this.$router.push({ path: '/login' })
+        },1500);
+        
+      });
+    }
   }
 }
 </script>
@@ -90,5 +111,12 @@ export default {
 
 .clear {
   clear: both;
+}
+
+.logout-wrapper {
+  width: 100%;
+}
+.logout-btn {
+  background-color:rgb(225, 6, 1) !important
 }
 </style>
