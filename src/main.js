@@ -34,3 +34,15 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+/* eslint-disable no-new */
+// document.addEventListener('deviceready', () => {
+//   new Vue({
+//       el: '#app',
+//       router,
+//       store,
+//       template: '<App/>',
+//       components: { App }
+//   })
+//   window.navigator.splashscreen.hide()
+// }, false);

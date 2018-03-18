@@ -3,7 +3,7 @@
     <group title="计划配置">
       <x-input title="定码个数" v-model="forecastCount"></x-input>
       <x-input title="计划周期" v-model="planCycle"></x-input>
-      <selector v-model="lookupPeriodCount" title="可查看期数" :options="periodsList" @on-change="onChange"></selector>
+      <selector v-model="lookupPeriodCount" title="完成周期" :options="periodsList" @on-change="onChange"></selector>
     </group>
     <group title="指标配置">
       <x-input title="偏差周期" v-model="unitHistoryCount"></x-input>
