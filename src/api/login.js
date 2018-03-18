@@ -1,9 +1,10 @@
 import request from '@/utils/request';
 
-export function loginByUsername(userName, password, systemType) {
+export function loginByUsername(userName, password, isForce, systemType) {
     const data = {
         userName,
         password,
+        isForce,
         systemType
       };
     return request({

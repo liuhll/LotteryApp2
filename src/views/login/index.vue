@@ -36,6 +36,7 @@ export default {
         userinfo: {
               username: null,
               password: null,
+              isForce: false,
               systemType: 'bjpks'
           },
         validateAccount: function(val) {
@@ -61,7 +62,24 @@ export default {
             this.$router.push({ path: '/' })
           }).catch(error => {
             this.$vux.loading.hide();
-            this.$vux.alert.show(error.message);
+            if (error.code === 40006) {
+               const _this = this;
+               _this.userinfo.isForce = true;
+               _this.$vux.confirm.show({
+                  title: '登陆',
+                  content: error.message,
+                  onConfirm() {            
+                    _this.handleLogin();
+                  },
+                  onCancel() {
+                    
+                  }
+               });
+               
+            } else {
+              this.$vux.alert.show(error.message);
+            } 
+            
           })
     },
     onChange() {
