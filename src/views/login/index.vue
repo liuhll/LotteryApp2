@@ -12,14 +12,23 @@
             :is-type="validatePwd" placeholder="请输入密码" @input="onChange()" ref="pwd">
               <img slot="label" style="padding-right:10px;display:block;" src="../../assets/images/password.svg" width="24" height="24">
             </x-input>
+            <div class="lottery-options">
+              <img style="display:inline-block;float:left;margin-left:16px;;margin-top:10px;" src="../../assets/images/option.svg" width="20" height="20">
+              <selector placeholder="请选择彩种" v-model="userinfo.systemType" name="district" :options="lotteryList"></selector>
+            </div>
             <x-button type="primary" @click.native="handleLogin()" :disabled="canUsable">立即登录</x-button>
           </group>
+          <div class="register-wrapper">
+            <span class="register-link"><a href="#">注册</a></span>
+            <span class="findpwd-link"><a href="#">找回密码</a></span>
+            <div class="clear"></div>
+          </div>
       </box>    
   </div>
 </template>
 
 <script>
-import { Box, XInput, Group, XButton, Cell } from 'vux'
+import { Box, XInput, Group, XButton, Cell, Selector } from 'vux'
 import { isvalidUsername, isNullOrEmpty } from '@/utils/validate'
 import { error } from 'util';
 
@@ -29,7 +38,8 @@ export default {
       XInput,
       Group,
       XButton,
-      Cell
+      Cell,
+      Selector
   },
   data () {
       return {
@@ -37,7 +47,7 @@ export default {
               username: null,
               password: null,
               isForce: false,
-              systemType: 'bjpks'
+              systemType: ''
           },
         validateAccount: function(val) {
             return {
@@ -51,7 +61,8 @@ export default {
                 msg: '密码不少于6位'
             }
         },
-        canUsable: true
+        canUsable: true,
+        lotteryList: [{key: 'bjpks', value: '北京Pk10'}]
       }
   },
   methods: {
@@ -103,8 +114,42 @@ export default {
 }
 </script>
 
-<style>
+<style less>
 .login-area {
     margin-top: 120px;
+}
+
+.register-wrapper {
+  margin-top: 15px;
+}
+
+.register-wrapper span {
+  display: inline-block;
+  font: 21px; 
+}
+
+.register-wrapper span a {
+  color: #757575;
+  text-decoration:underline
+}
+.register-wrapper span a:active {
+  color: #EA0000;
+}
+
+.register-link {
+  float: left; 
+  margin-left: 15px
+}
+
+.findpwd-link {
+  float: right;
+  margin-right: 15px
+}
+.clear {
+  clear: both;
+}
+
+.lottery-options {
+
 }
 </style>
