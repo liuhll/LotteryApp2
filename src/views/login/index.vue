@@ -19,7 +19,7 @@
             <x-button type="primary" @click.native="handleLogin()" :disabled="canUsable">立即登录</x-button>
           </group>
           <div class="register-wrapper">
-            <span class="register-link"><a href="#">注册</a></span>
+            <span class="register-link"><a href="javascript:void(0)" @click="goRegister()">注册</a></span>
             <span class="findpwd-link"><a href="#">找回密码</a></span>
             <div class="clear"></div>
           </div>
@@ -90,8 +90,10 @@ export default {
             } else {
               this.$vux.alert.show(error.message);
             } 
-            
           })
+    },
+    goRegister() {
+      this.$router.push({ name: 'register' })
     },
     onChange() {
        if (isNullOrEmpty(this.userinfo.username)) {

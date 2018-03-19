@@ -83,6 +83,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'register',
+        path: 'register',
+        component: () => import('@/views/register/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
 
     ]
