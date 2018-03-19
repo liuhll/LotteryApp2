@@ -92,8 +92,25 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'retrievePassword',
+        path: 'retrievePassword',
+        component: () => import('@/views/retrieve-password/index'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
+      },
+      {
+        name: 'confirePwd',
+        path: 'confirePwd',
+        component: () => import('@/views/retrieve-password/confirePwd'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
-
     ]
   },
 

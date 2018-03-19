@@ -20,7 +20,7 @@
           </group>
           <div class="register-wrapper">
             <span class="register-link"><a href="javascript:void(0)" @click="goRegister()">注册</a></span>
-            <span class="findpwd-link"><a href="#">找回密码</a></span>
+            <span class="findpwd-link"><a href="javascript:void(0)" @click="goRetrievePassword()">找回密码</a></span>
             <div class="clear"></div>
           </div>
       </box>    
@@ -94,6 +94,9 @@ export default {
     },
     goRegister() {
       this.$router.push({ name: 'register' })
+    },
+    goRetrievePassword() {
+      this.$router.push({ name: 'retrievePassword' })
     },
     onChange() {
        if (isNullOrEmpty(this.userinfo.username)) {
