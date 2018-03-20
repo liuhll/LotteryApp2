@@ -1,7 +1,8 @@
 import { 
     loginByUsername,
     getUserInfo,
-    logout
+    logout,
+    register
 } from '@/api/login'
 import { 
     getToken,
@@ -80,6 +81,21 @@ const user = {
                  reject(error)
              });
           });
+        },
+        Register({ }, userInfo) {
+            
+            return new Promise((resolve, reject) => {
+                register(userInfo).then(response => {
+                    const data = response;
+                    if (data.success) {
+                      resolve(data.result);
+                    } else {
+                        reject(data.error)
+                    }
+                }).catch(error => {
+                    reject(error)
+                })
+            })
         }
     }
 }

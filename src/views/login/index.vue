@@ -16,7 +16,7 @@
               <img style="display:inline-block;float:left;margin-left:16px;;margin-top:10px;" src="../../assets/images/option.svg" width="20" height="20">
               <selector placeholder="请选择彩种" v-model="userinfo.systemType" name="district" :options="lotteryList"></selector>
             </div>
-            <x-button type="primary" @click.native="handleLogin()" :disabled="canUsable">立即登录</x-button>
+            <x-button type="primary" @click.native="handleLogin()" :disabled="!canUsable">立即登录</x-button>
           </group>
           <div class="register-wrapper">
             <span class="register-link"><a href="javascript:void(0)" @click="goRegister()">注册</a></span>
@@ -61,7 +61,7 @@ export default {
                 msg: '密码不少于6位'
             }
         },
-        canUsable: true,
+        canUsable: false,
         lotteryList: [{key: 'bjpks', value: '北京Pk10'}]
       }
   },
@@ -100,19 +100,19 @@ export default {
     },
     onChange() {
        if (isNullOrEmpty(this.userinfo.username)) {
-            this.canUsable = true;
+            this.canUsable = false;
             return;
        }
        if (isNullOrEmpty(this.userinfo.password)) {
-            this.canUsable = true;
+            this.canUsable = false;
             return;
        }
        const usernameValid = this.$refs.username.valid
        const pwdValid = this.$refs.pwd.valid
        if (usernameValid && pwdValid) {
-            this.canUsable = false;
+            this.canUsable = true;
        } else {
-           this.canUsable = true;
+           this.canUsable = false;
        }
     }
   }
