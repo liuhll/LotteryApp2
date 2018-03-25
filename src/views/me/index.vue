@@ -8,16 +8,12 @@
           </div>
           <div class="nick-wrapper">
             <div class="nick-row">
-              <span>账号:</span>
-              <span>张三</span>
-            </div>
-            <div class="nick-row">
               <span>手机号:</span>
-              <span>13128729129</span>
+              <span v-if="userInfo.phone&&userInfo.phone.isBind">{{userInfo.phone.account}}</span>
             </div>
             <div class="nick-row">
               <span>电子邮件:</span>
-              <span>1029765111@qq.com</span>
+              <span v-if="userInfo.email&&userInfo.email.isBind">{{userInfo.email.account}}</span>
             </div>
           </div>
           <div class="clear"></div>
@@ -58,6 +54,7 @@
 
 <script>
 import { Grid, GridItem, CellBox, XButton } from 'vux'
+import { throws } from 'assert';
 
 export default {
   components: {
@@ -65,6 +62,17 @@ export default {
     GridItem,
     CellBox,
     XButton
+  },
+  data() {
+    return {
+      userInfo: {}
+    }
+  },
+  created() {
+    const _this = this;
+    _this.$store.dispatch('MeInfo').then(result => {
+      _this.userInfo = result;
+    })
   },
   methods: {
     logout() {

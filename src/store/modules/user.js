@@ -10,6 +10,8 @@ import {
     removeToken
  } from '@/utils/auth'
 
+ import { isNullOrEmpty } from '@/utils/validate'
+
 const user = {
     state: {
       userInfo: null,
@@ -92,6 +94,34 @@ const user = {
                     } else {
                         reject(data.error)
                     }
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+        MeInfo({ commit, state },) {
+            return new Promise((resolve, reject) => {
+                getUserInfo(state.token).then( response => {
+                    if (response.success) {
+                        const user = response.result.userInfo
+
+                        let userInfo = { }
+                        if (isNullOrEmpty(user.email)) {
+                            userInfo.email = { isBind: false, account: '' }
+                        } else {
+                            userInfo.email = { isBind: true, account: user.email }
+                        }
+                        if (isNullOrEmpty(user.phone)) {
+                            userInfo.phone = { isBind: false, account: '' }
+                        } else {
+                            userInfo.phone = { isBind: true, account: user.phone }
+                        }
+                        resolve(userInfo)
+                    } else {
+                        reject(response.error)
+                    }
+                    
+                  
                 }).catch(error => {
                     reject(error)
                 })
