@@ -27,7 +27,7 @@
       </cell-box>
    </group>
     <box gap="10px 10px">
-      <x-button type="primary" action-type="button"  @click.native="saveBasicNorm()">保存</x-button>
+      <x-button type="primary" action-type="button"  class="basicnorm-btn" @click.native="saveBasicNorm()">保存</x-button>
     </box>
   </div>
 </template>
@@ -193,7 +193,7 @@ export default {
   margin: 5px;
   color: #888;
 }
-.weui-btn_primary {
+.basicnorm-btn {
     background-color:rgb(225, 6, 1) !important
 }
 </style>
