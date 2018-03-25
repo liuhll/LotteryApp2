@@ -5,7 +5,7 @@
        <box gap="10px 10px">
           <group class="login-area" ref="loginForm">
             <x-input title="账号" name="username" v-model="userinfo.username" required
-            :is-type="validateAccount" placeholder="用户名|手机|Email" @input="onChange()" ref="username">
+            :is-type="validateAccount" placeholder="手机|Email" @input="onChange()" ref="username">
               <img slot="label" style="padding-right:10px;display:block;" src="../../assets/images/account.svg" width="24" height="24">
             </x-input>
             <x-input title="密码" v-model="userinfo.password" type="password" required 
@@ -14,7 +14,7 @@
             </x-input>
             <div class="lottery-options">
               <img style="display:inline-block;float:left;margin-left:16px;;margin-top:10px;" src="../../assets/images/option.svg" width="20" height="20">
-              <selector placeholder="请选择彩种" v-model="userinfo.systemType" name="district" :options="lotteryList"></selector>
+              <selector placeholder="请选择彩种" v-model="userinfo.systemType" name="district" :on-change="onChange()" :options="lotteryList"></selector>
             </div>
             <x-button type="primary" @click.native="handleLogin()" :disabled="!canUsable">立即登录</x-button>
           </group>
@@ -106,6 +106,10 @@ export default {
        if (isNullOrEmpty(this.userinfo.password)) {
             this.canUsable = false;
             return;
+       }
+       if (isNullOrEmpty(this.userinfo.systemType)) {
+          this.canUsable = false;
+          return;
        }
        const usernameValid = this.$refs.username.valid
        const pwdValid = this.$refs.pwd.valid
