@@ -192,6 +192,8 @@ export default {
   font-size: 8px;
   margin: 5px;
   color: #888;
-
+}
+.weui-btn_primary {
+    background-color:rgb(225, 6, 1) !important
 }
 </style>
