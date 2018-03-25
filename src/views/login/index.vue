@@ -62,8 +62,16 @@ export default {
             }
         },
         canUsable: false,
-        lotteryList: [{key: 'bjpks', value: '北京Pk10'}]
+        lotteryList: []
       }
+  },
+  created() {
+      let _this = this;
+      _this.$store.dispatch('GetLotteryList').then(result => {
+        result.map( item => {
+          _this.lotteryList.push({key: item.lotteryCode, value: item.name})
+        });
+      });
   },
   methods: {
     handleLogin() {

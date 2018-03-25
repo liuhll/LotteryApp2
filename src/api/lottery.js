@@ -77,3 +77,10 @@ export function updateUserNromDefaultConfig(basicNorm) {
         data: basicNorm
     })
 }
+
+export function getLotteryList() {
+    return request({
+        url: '/v1/lottery/list',
+        method: 'GET'
+    })
+}
