@@ -33,6 +33,9 @@ service.interceptors.response.use(
       if (error.unAuthorizedRequest) {
         removeToken()
       }
+      if (error.code.indexOf('400') > -1) {
+        removeToken()
+      }
     }
   )
 
