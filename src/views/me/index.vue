@@ -10,10 +10,12 @@
             <div class="nick-row">
               <span>手机号:</span>
               <span v-if="userInfo.phone&&userInfo.phone.isBind">{{userInfo.phone.account}}</span>
+              <span v-else class="bind-link"><a href="javascript:void(0)" @click="bindProfile(3)">未绑定</a></span>
             </div>
             <div class="nick-row">
               <span>电子邮件:</span>
               <span v-if="userInfo.email&&userInfo.email.isBind">{{userInfo.email.account}}</span>
+              <span v-else class="bind-link"><a href="javascript:void(0)" @click="bindProfile(2)">未绑定</a></span>
             </div>
           </div>
           <div class="clear"></div>
@@ -84,6 +86,9 @@ export default {
         },1500);
         
       });
+    },
+    bindProfile(profileType) {
+      this.$router.push({ path: '/bindprofile', query: { profileType: profileType } })
     }
   }
 }
@@ -127,4 +132,15 @@ export default {
 .logout-btn {
   background-color:rgb(225, 6, 1) !important
 }
+.bind-link a {
+  margin-left: 9px;
+  color: #757575;
+  font-weight: 600;
+  text-decoration:underline
+}
+
+.bind-link a:active {
+  color: #EA0000;
+}
+
 </style>

@@ -110,6 +110,14 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      }, {
+        name: 'bindprofile',
+        path: 'bindprofile',
+        component: () => import('@/views/me/bindProfile'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },

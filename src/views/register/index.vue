@@ -135,7 +135,7 @@ export default {
       },
       getidentifyCode() {
           this.$vux.loading.show('获取验证码...');
-          this.$store.dispatch('GetIdentifyCode1', this.user.account).then(data => {
+          this.$store.dispatch('GetIdentifyCode1', { account: this.user.account }).then(data => {
             this.$vux.loading.hide();
             this.$vux.alert.show(data);
             this.countdownTimeOut = setTimeout(this.resetTdentifyCodeText,1000);
