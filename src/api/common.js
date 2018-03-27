@@ -17,10 +17,26 @@ export function getIdentifyCode2 (account) {
     });
 }
 
+export function verifyIdentifycode(identifyCodeInfo) {
+    return request({
+        url: '/v1/message/identifycode',
+        method: 'POST',
+        data: identifyCodeInfo
+    });
+}
+
 export function bindProfile(bindInfo) {
     return request({
         url: '/account/userprofie',
         method: 'PUT',
         data: bindInfo
+    });
+}
+
+export function retrievePassword(pwdInfo) {
+    return request({
+        url: '/account/retrievepassword',
+        method: 'PUT',
+        data: pwdInfo
     });
 }

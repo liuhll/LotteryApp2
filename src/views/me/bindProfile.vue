@@ -68,7 +68,7 @@ export default {
           validateAccount: function(val) {
             let msgStr = '账号不正确'
             let validFunc = validateEmail;
-            if (this.$route.query.profileType == 2) {
+            if (this.$route.params.profileType == 2) {
                 msgStr = '您输入的Email格式不正确'
             } else {
                 msgStr = '您输入的手机号码不正确'
@@ -88,8 +88,8 @@ export default {
       }
   },
   created() {
-    this.bindInfo.profileType = this.$route.query.profileType
-    if(this.$route.query.profileType == 2) {
+    this.bindInfo.profileType = this.$route.params.profileType
+    if(this.$route.params.profileType == 2) {
         this.profileTitle = 'Email'
         this.profilePlaceholder = '请输入电子邮箱'
     } else {

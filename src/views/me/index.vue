@@ -88,7 +88,7 @@ export default {
       });
     },
     bindProfile(profileType) {
-      this.$router.push({ path: '/bindprofile', query: { profileType: profileType } })
+      this.$router.push({ name: 'bindprofile', params: { profileType: profileType } })
     }
   }
 }
