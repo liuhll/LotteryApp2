@@ -40,3 +40,11 @@ export function retrievePassword(pwdInfo) {
         data: pwdInfo
     });
 }
+
+export function resetPassword(pwdInfo) {
+    return request({
+        url: '/account/password',
+        method: 'PUT',
+        data: pwdInfo
+    });
+}

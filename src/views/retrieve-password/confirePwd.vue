@@ -30,9 +30,8 @@
          class="register-btn"
          :disabled="!canUsable"  
          @click.native="confirm()">确认</x-button>
-      </cell-box>
-        
-      </group>
+      </cell-box>        
+    </group>
 </template>
 
 <script>

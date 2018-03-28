@@ -1,6 +1,6 @@
 <template>
   <div class="me-container">
-    <grid>
+    <group>
       <cell-box>
         <div slot="default" class="me-info">
           <div class="avatar-wrapper">
@@ -25,12 +25,12 @@
         购买授权
       </cell-box>
       <cell-box>
-        在线客服
-      </cell-box>
-      <cell-box>
         我的授权
       </cell-box>
       <cell-box>
+        在线客服
+      </cell-box>
+      <cell-box is-link :link="{ path:'resetpwd', params: this.userInfo}">
         密码管理
       </cell-box>
       <cell-box>
@@ -50,24 +50,25 @@
           <x-button type="primary" action-type="button" class="logout-btn"  @click.native="logout()">退出登录</x-button>
         </div>
       </cell-box>
-    </grid>
+    </group>
   </div>
 </template>
 
 <script>
-import { Grid, GridItem, CellBox, XButton } from 'vux'
+import { Grid, GridItem, Group, CellBox, XButton } from 'vux'
 import { throws } from 'assert';
 
 export default {
   components: {
     Grid,
     GridItem,
+    Group,
     CellBox,
     XButton
   },
   data() {
     return {
-      userInfo: {}
+      userInfo: {},
     }
   },
   created() {
@@ -79,7 +80,6 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('Logout').then(result => {
-        this.lotteryHistory = result;
         this.$vux.alert.show(result);
         setTimeout(()=> {
           this.$router.push({ path: '/login' })
@@ -116,12 +116,15 @@ export default {
 }
 .nick-row {
   line-height: 14px;
-  padding: 5px 10px;
+  padding: 10px 12px;
 }
 .nick-row span:nth-child(2){
   color: #888;
 }
-
+.weui-cell {
+  padding: 8px 12px!important;
+  font-size: 14px;
+}
 .clear {
   clear: both;
 }

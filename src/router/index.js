@@ -118,6 +118,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'resetpwd',
+        path: 'resetpwd',
+        component: () => import('@/views/me/resetPwd'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },
