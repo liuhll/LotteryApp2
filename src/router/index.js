@@ -127,6 +127,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'opinion',
+        path: 'opinion',
+        component: () => import('@/views/me/opinion'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },

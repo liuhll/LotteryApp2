@@ -48,3 +48,11 @@ export function resetPassword(pwdInfo) {
         data: pwdInfo
     });
 }
+
+export function addOpinion(opinion) {
+    return request({
+        url: '/v1/operation/v1/opinion',
+        method: 'POST',
+        data: opinion
+    });
+}

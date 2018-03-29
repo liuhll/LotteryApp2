@@ -33,7 +33,7 @@
       <cell-box is-link :link="{ path:'resetpwd', params: this.userInfo}">
         密码管理
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="opinion">
         意见反馈
       </cell-box>
       <cell-box>

@@ -4,7 +4,8 @@ import {
     bindProfile,
     verifyIdentifycode,
     retrievePassword,
-    resetPassword
+    resetPassword,
+    addOpinion
   } from '@/api/common'
 
 const commonData = {
@@ -92,6 +93,20 @@ const commonData = {
                  reject(error);
              })
          }); 
+      },
+      AddOpinion({ }, opinion) {
+        return new Promise((resolve, reject) => {
+            addOpinion(opinion).then(response => {
+                 if (response.success) {
+                     const data = response.result;
+                     resolve(data);
+                 } else {
+                     reject(response.error)
+                 }
+             }).catch(error => {
+                 reject(error);
+             })
+         });  
       }
     }
 }

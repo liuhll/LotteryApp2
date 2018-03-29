@@ -26,6 +26,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const data = response.data;
+        if (!data.success) {
+          if ((`${data.error.code}`).indexOf('400') > -1) {
+            removeToken()
+          }
+        }
         return data;
     },
     error => { 
