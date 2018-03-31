@@ -27,7 +27,7 @@
       <cell-box>
         我的授权
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="customservice">
         在线客服
       </cell-box>
       <cell-box is-link :link="{ path:'resetpwd', params: this.userInfo}">

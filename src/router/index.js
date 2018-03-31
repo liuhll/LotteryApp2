@@ -154,6 +154,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'customservice',
+        path: 'customservice',
+        component: () => import('@/views/me/customService'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },
