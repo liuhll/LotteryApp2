@@ -36,7 +36,7 @@
       <cell-box is-link link="opinion">
         意见反馈
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="aboutus">
         关于我们
       </cell-box>
       <cell-box is-link link="onlinehelp">

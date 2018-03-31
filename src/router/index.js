@@ -145,6 +145,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'aboutus',
+        path: 'aboutus',
+        component: () => import('@/views/me/aboutUs'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },
