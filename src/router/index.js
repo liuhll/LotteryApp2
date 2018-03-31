@@ -136,6 +136,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'onlinehelp',
+        path: 'onlinehelp',
+        component: () => import('@/views/me/onlinehelp'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },

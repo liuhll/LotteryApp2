@@ -5,7 +5,8 @@ import {
     verifyIdentifycode,
     retrievePassword,
     resetPassword,
-    addOpinion
+    addOpinion,
+    onlineHelp
   } from '@/api/common'
 
 const commonData = {
@@ -107,6 +108,20 @@ const commonData = {
                  reject(error);
              })
          });  
+      },
+      OnlineHelp({ }, lotteryCode) {
+        return new Promise((resolve, reject) => {
+            onlineHelp(lotteryCode).then(response => {
+                 if (response.success) {
+                     const data = response.result;
+                     resolve(data);
+                 } else {
+                     reject(response.error)
+                 }
+             }).catch(error => {
+                 reject(error);
+             })
+         });    
       }
     }
 }

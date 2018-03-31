@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  BASE_API: '"http://api.dev.clmeng.com"'
+  BASE_API: '"http://api.clmeng.com/prod"'
 }

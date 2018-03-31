@@ -13,7 +13,11 @@ service.interceptors.request.use(
   config => {
     if (store.getters.token) {
       config.headers.common.Authorization = getToken(); 
+      // if (store.getters.userInfo == null || store.getters.userInfo == null) {
+      //   store.dispatch('GetUserInfo');
+      // }
     }
+  
     return config;
   }, error => {
     // Do something with request error

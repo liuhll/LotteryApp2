@@ -39,7 +39,7 @@
       <cell-box>
         关于我们
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="onlinehelp">
         在线帮助
       </cell-box>
       <cell-box>

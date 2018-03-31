@@ -54,7 +54,6 @@ const user = {
                 });
             });
         },
-
         GetUserInfo({ commit, state }) {
            return new Promise((resolve, reject) => {
               getUserInfo(state.token).then(response => {
@@ -99,12 +98,13 @@ const user = {
                 })
             })
         },
-        MeInfo({ commit, state },) {
+        MeInfo({ commit, state }) {
             return new Promise((resolve, reject) => {
-                getUserInfo(state.token).then( response => {
+                getUserInfo(state.token).then(response => {
                     if (response.success) {
                         const user = response.result.userInfo
-
+                        commit('SET_USERINFO', response.result)
+                        commit('SET_LOTTERYINFO', response.result.lotteryInfo) 
                         let userInfo = { }
                         if (isNullOrEmpty(user.email)) {
                             userInfo.email = { isBind: false, account: '' }
@@ -126,6 +126,22 @@ const user = {
                     reject(error)
                 })
             })
+        },
+        LotteryInfo({ commit, state }) {
+            return new Promise((resolve, reject) => {
+                getUserInfo(state.token).then(response => {
+                    if (response.success) {
+                        commit('SET_USERINFO', response.result)
+                        commit('SET_LOTTERYINFO', response.result.lotteryInfo) 
+                        resolve(response.result.lotteryInfo);
+                     } else {
+                        reject(response.error);
+                     }
+                }).catch(error => {
+                        reject(error)
+                })
+            });
+            
         }
     }
 }

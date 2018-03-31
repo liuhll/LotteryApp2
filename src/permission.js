@@ -9,7 +9,7 @@ router.beforeEach((to, from, next) => {
         if (to.path === '/login') {
             next({ path: '/' })
         } else {
-            if (store.getters.userInfo === null) {
+            if (store.getters.userInfo === null || store.getters.lotteryInfo == null) {
                 store.dispatch('GetUserInfo');
             }
             next()

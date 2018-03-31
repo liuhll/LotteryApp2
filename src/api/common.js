@@ -56,3 +56,11 @@ export function addOpinion(opinion) {
         data: opinion
     });
 }
+
+export function onlineHelp(lotteryCode) {
+    return request({
+        url: '/v1/operation/v1/onlinehelps',
+        method: 'GET',
+        params: lotteryCode
+    });
+}
