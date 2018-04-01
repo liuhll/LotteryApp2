@@ -42,7 +42,7 @@
       <cell-box is-link link="onlinehelp">
         在线帮助
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="version">
         检查更新
       </cell-box>
       <cell-box>

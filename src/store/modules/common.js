@@ -6,7 +6,8 @@ import {
     retrievePassword,
     resetPassword,
     addOpinion,
-    onlineHelp
+    onlineHelp,
+    getAppInfo
   } from '@/api/common'
 
 const commonData = {
@@ -122,6 +123,20 @@ const commonData = {
                  reject(error);
              })
          });    
+      },
+      GetAppInfo({ }, platform) {
+        return new Promise((resolve, reject) => {
+            getAppInfo(platform).then(response => {
+                 if (response.success) {
+                     const data = response.result;
+                     resolve(data);
+                 } else {
+                     reject(response.error)
+                 }
+             }).catch(error => {
+                 reject(error);
+             })
+         }); 
       }
     }
 }

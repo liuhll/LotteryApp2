@@ -51,7 +51,7 @@ export function resetPassword(pwdInfo) {
 
 export function addOpinion(opinion) {
     return request({
-        url: '/v1/operation/v1/opinion',
+        url: '/v1/operation/opinion',
         method: 'POST',
         data: opinion
     });
@@ -59,8 +59,16 @@ export function addOpinion(opinion) {
 
 export function onlineHelp(lotteryCode) {
     return request({
-        url: '/v1/operation/v1/onlinehelps',
+        url: '/v1/operation/onlinehelps',
         method: 'GET',
         params: lotteryCode
     });
+}
+
+export function getAppInfo(platform) {
+    return request({
+      url: '/v1/operation/appinfo',
+      method: 'GET',
+      params: platform
+    })
 }

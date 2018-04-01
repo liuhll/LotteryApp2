@@ -163,6 +163,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'version',
+        path: 'version',
+        component: () => import('@/views/me/version'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },
