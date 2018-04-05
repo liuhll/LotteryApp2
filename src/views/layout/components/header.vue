@@ -61,12 +61,14 @@ export default {
       this.$store.dispatch('UpdateUserPlans', planIds).then( result => {
         const _this = this;
         this.$vux.loading.hide()
-        this.$vux.confirm.prompt(result, {
+        this.$vux.confirm.show({
+          title: '计划',
+          content: result + '返回计划页面',
           onCancel() {
 
           },
           onConfirm() {
-            this.$router.push({ path: 'plan' })
+            _this.$router.push({ path: 'plan' })
           }
         })
         

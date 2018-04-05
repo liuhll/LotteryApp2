@@ -86,14 +86,14 @@ export default {
 @import '../../assets/styles/lottery-number.less';
 
 .track-plan-wrapper {
-    height: 50px;
+    height: auto!important;
     text-align: left;
     padding: 5px;
     display: block !important;
 }
 .trank-row {
-    height: 25px;
-    line-height: 20px;
+    height: auto!important;
+    line-height: auto!important;
     width: 100%;
 }
 .trank-row .plan-name {
