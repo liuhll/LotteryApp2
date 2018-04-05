@@ -47,7 +47,7 @@ export default {
               username: null,
               password: null,
               isForce: false,
-              systemType: ''
+              systemType: null
           },
         validateAccount: function(val) {
             return {

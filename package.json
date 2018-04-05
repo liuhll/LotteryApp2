@@ -20,8 +20,8 @@
     "vue-router": "^3.0.1",
     "vue-slider-component": "^2.5.8",
     "vuex": "^3.0.1",
-    "vux": "^2.7.8",
-    "vux-loader": "^1.1.31"
+    "vux": "^2.8.1",
+    "vux-loader": "^1.2.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
