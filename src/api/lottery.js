@@ -20,6 +20,12 @@ export function getPredictDatas() {
         method: 'GET'
     });
 }
+export function updatePredictDatas() {
+    return request({
+        url: '/v1/lottery/predictdatas',
+        method: 'PUT'
+    });
+}
 
 export function getHistory(pageIndex, lotteryTime) {
     const data = {

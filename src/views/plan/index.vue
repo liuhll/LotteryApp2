@@ -1,7 +1,7 @@
 <template>
   <div class="plan-wrapper">
       <lottery-run v-on:lotterydata="predictdatas"></lottery-run>
-      <lottery-func></lottery-func>
+      <lottery-func v-on:switchFormula="switchFormula"></lottery-func>
       <tracking-number :predictDatas="predictDatas"></tracking-number>
   </div>
 </template>
@@ -28,6 +28,16 @@ export default {
         this.$vux.loading.show('计算中...');
       }
       this.$store.dispatch('GetPredictDatas').then(result => {
+          this.predictDatas = result;
+          this.$vux.loading.hide();
+        }).catch(error => {
+          this.$vux.loading.hide();
+          this.$vux.alert.show(error.message);
+        })
+    },
+    switchFormula() {
+       this.$vux.loading.show('切换公式,重新计算中...');
+       this.$store.dispatch('UpdatePredictDatas').then(result => {
           this.predictDatas = result;
           this.$vux.loading.hide();
         }).catch(error => {

@@ -1,6 +1,7 @@
 import {
     getFinallotterydata,
     getPredictDatas, 
+    updatePredictDatas,
     getHistory,
     getPredictDetailDatas, 
     getPredictDetailData,
@@ -55,6 +56,18 @@ const lotteryData = {
             });
         });
        },
+       UpdatePredictDatas() {
+        return new Promise((resolve, reject) => {
+            updatePredictDatas().then(response => {
+                if (response.success) {
+                   const data = response.result;
+                   resolve(data);
+                } else {
+                    reject(response.error);
+                }
+            });
+        }); 
+       },
        GetHistory({ }, histroyParams) {
           return new Promise((resolve, reject) => {
               getHistory(histroyParams.pageIndex, histroyParams.lotteryTime).then(response => {
@@ -91,7 +104,7 @@ const lotteryData = {
                 }
             });
         }); 
-       },
+       },      
        GetUserPlans({ commit }) {
            return new Promise((resolve, reject) => {
               getUserPlans().then(response => {

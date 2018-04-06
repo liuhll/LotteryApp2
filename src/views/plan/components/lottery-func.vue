@@ -4,7 +4,7 @@
       <grid-item label="选择计划" link="/chiceplan">
        <img slot="icon" src="../../../assets/images/lotteryfunc/plan.svg">
       </grid-item>
-      <grid-item label="切换公式">
+      <grid-item label="切换公式"  @click.native="switchFormula()">
         <img slot="icon" src="../../../assets/images/lotteryfunc/function.svg">
       </grid-item>
       <grid-item label="基础指标" link="/basicnorm">
@@ -30,6 +30,21 @@ export default {
   components: {
     Grid,
     GridItem
+  },
+  methods: {
+    switchFormula() {
+      const _this = this;
+       this.$vux.confirm.show({
+        title: '是否确定切换公式?',
+        content: '当前彩票数据引擎会根据您设定的计划指标选择最优公式重新计算追号数据',
+        onConfirm() {            
+          _this.$emit('switchFormula');
+         },
+         onCancel() {
+          
+         }
+       })
+    }
   }
 }
 </script>
