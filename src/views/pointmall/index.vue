@@ -2,19 +2,19 @@
    <div class="point-mall-container">
     <grid :cols='4'>  
       <grid-item label="我的积分">
-       <img slot="icon">
+        <img slot="icon" src="../../assets/images/pointmall/mypoints.svg">
       </grid-item>   
       <grid-item label="积分记录">
-       <img slot="icon">
+       <img slot="icon" src="../../assets/images/pointmall/pointrecord.svg">
       </grid-item>
       <grid-item label="积分购买">
-       <img slot="icon">
+       <img slot="icon" src="../../assets/images/pointmall/points.svg">
       </grid-item>
       <grid-item label="签到">
-       <img slot="icon">
+       <img slot="icon" src="../../assets/images/pointmall/signed.svg">
       </grid-item>
       <grid-item label="分享App">
-       <img slot="icon">
+       <img slot="icon" src="../../assets/images/pointmall/share.svg">
       </grid-item>     
     </grid>
   </div>
