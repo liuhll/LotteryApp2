@@ -70,9 +70,7 @@ export default {
           onConfirm() {
             _this.$router.push({ path: 'plan' })
           }
-        })
-        
-        
+        })              
       }).catch(error => {
         const _this = this;
         this.$vux.loading.hide()

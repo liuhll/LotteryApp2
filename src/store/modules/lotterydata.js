@@ -10,7 +10,10 @@ import {
     getUserNromDefaultConfig,
     updateUserNromDefaultConfig,
     getLotteryList,
-    getNormPlanConfig
+    getNormPlanConfig,
+    getUserPlanNorm,
+    updateUserNromConfig,
+    updatePredictData
     } from '@/api/lottery'
 
 const lotteryData = {
@@ -170,9 +173,9 @@ const lotteryData = {
             })
            })
        },
-       GetNormPlanConfig() {
-        return new Promise((resolve, reject) => {
-            getNormPlanConfig().then(response => {
+       GetNormPlanConfig({ }, planId) {
+          return new Promise((resolve, reject) => {
+            getNormPlanConfig(planId).then(response => {
                 if (response.success) {
                     const data = response.result;
                     resolve(data)
@@ -182,7 +185,49 @@ const lotteryData = {
             }).catch(error => {
                 reject(error)
             })
-           })
+          })
+       },
+       GetUserPlanNorm({ }, planId) {
+        return new Promise((resolve, reject) => {
+            getUserPlanNorm(planId).then(response => {
+                if (response.success) {
+                    const data = response.result;
+                    resolve(data)
+                } else {
+                    reject(response.error)
+                }
+            }).catch(error => {
+                reject(error)
+            })
+          })
+       },
+       UpdateUserNromConfig({ }, userPlanNorm) {
+        return new Promise((resolve, reject) => {
+            updateUserNromConfig(userPlanNorm).then(response => {
+                if (response.success) {
+                    const data = response.result;
+                    resolve(data)
+                } else {
+                    reject(response.error)
+                }
+            }).catch(error => {
+                reject(error)
+            })
+          })
+       },
+       UpdatePredictData({ }, normId) {
+        return new Promise((resolve, reject) => {
+            updatePredictData(normId).then(response => {
+                if (response.success) {
+                    const data = response.result;
+                    resolve(data)
+                } else {
+                    reject(response.error)
+                }
+            }).catch(error => {
+                reject(error)
+            })
+          })
        }
    }
 }

@@ -21,20 +21,24 @@
         <vue-slider class="norm-slider" ref="slider3" v-model="expectScoreSilder.value" :min="0" :max="100" width="60%"></vue-slider>
       </div>
     </group>
+    <group title="数据筛选" v-if="isShowLotteryNumbers">
+      <checker v-model="selectedNumbers" type="checkbox" default-item-class="demo1-item" selected-item-class="demo1-item-selected">
+        <checker-item :value="item.number" v-for="(item, index) in lotteryNumbers" :key="index">{{item.number}}</checker-item>
+      </checker>
+    </group>
    <group title="说明">
       <cell-box primary="content">
-        <div class="memo-text">- 基础指标不作用于某个具体的指标,仅在切换计划时，为某个具体计划的设置默认指标值;</div>
-        <div class="memo-text">- 如果你需要为某个具体的计划调整指标,请通过"计划详情"--"调整指标"来更改该计划的指标;</div>
+        <div class="memo-text">- 配置计划指标因子,数据引擎会根据您配置的参数搜索最优公式，并重新预测开奖数据</div>
       </cell-box>
    </group>
     <box gap="10px 10px">
-      <x-button type="primary" action-type="button"  class="basicnorm-btn" :disabled="!canSave" @click.native="saveBasicNorm()">保存</x-button>
+      <x-button type="primary" action-type="button"  class="basicnorm-btn" :disabled="!canSave" @click.native="saveUserNorm()">保存</x-button>
     </box>
   </div>
 </template>
 
 <script>
-import { XInput, Group, XButton, Cell, CellBox, Selector, Box } from "vux";
+import { XInput, Group, XButton, Cell, CellBox, Selector, Box, Checker, CheckerItem } from "vux";
 import VueSlider from "vue-slider-component";
 import { debug } from "util";
 export default {
@@ -46,7 +50,9 @@ export default {
     CellBox,
     Box,
     Selector,
-    VueSlider
+    VueSlider,
+    Checker,
+    CheckerItem
   },
   data() {
     return {
@@ -54,8 +60,13 @@ export default {
       forecastCount: 0,
       unitHistoryCount: 0,
       historyCount: 0,
+      isShowLotteryNumbers: false,
+      planId: null,
       canSave: false,
+      normId: null,
+      lotteryNumbers: [],
       forecastCounts: [],
+      selectedNumbers: [],
       planCycles: [],
       rightSilder: {
         valueRange: [0, 10],
@@ -106,8 +117,9 @@ export default {
     };
   },
   created() {
+    this.planId = this.$route.params.planId;
     this.getNormPlanConfig();
-    this.getUserDefaultNorm();
+    this.getUserPlanNorm();
   },
   methods: {
     onChange() {
@@ -120,13 +132,13 @@ export default {
       this.canSave = true;
     },
     getNormPlanConfig() {
-      this.$store.dispatch("GetNormPlanConfig").then(result => {
+      this.$store.dispatch("GetNormPlanConfig", { planId: this.planId }).then(result => {
         this.forecastCounts = result.forecastCounts;
         this.planCycles = result.planCycles;
       })
     },
-    getUserDefaultNorm() {
-      this.$store.dispatch("GetUserNromDefaultConfig").then(result => {
+    getUserPlanNorm() {
+      this.$store.dispatch("GetUserPlanNorm",{ planId: this.planId }).then(result => {
         this.rightSilder.value.push(result.minRightSeries); //result.minRightSeries
         this.rightSilder.value.push(result.maxRightSeries); //result.maxRightSeries
         this.errorSilder.value.push(result.minErrorSeries);
@@ -138,11 +150,23 @@ export default {
         this.historyCount = result.historyCount;
         this.unitHistoryCount = result.unitHistoryCount;
         this.lookupPeriodCount = result.lookupPeriodCount;
+        this.isShowLotteryNumbers = result.isShowLotteryNumbers;
+        this.lotteryNumbers = result.lotteryNumbers;
+        this.normId = result.id;
+        for(var i in result.lotteryNumbers) {           
+            if (result.lotteryNumbers[i].isSelected) {
+               this.selectedNumbers.push(result.lotteryNumbers[i].number)
+            }
+        }
         this.canSave = true;
       });
     },
-    saveBasicNorm() {
-      let basicNorm = {
+    getCustomNumbers() {
+
+    },
+    saveUserNorm() {
+      let userPlanNorm = {
+        planId: this.planId,
         forecastCount: this.forecastCount,
         planCycle: this.planCycle,
         unitHistoryCount: this.unitHistoryCount,
@@ -153,20 +177,31 @@ export default {
         maxErrorSeries: this.errorSilder.value[1],
         lookupPeriodCount: this.lookupPeriodCount,
         expectMinScore: this.expectScoreSilder.value[0],
-        expectMaxScore: this.expectScoreSilder.value[1]
+        expectMaxScore: this.expectScoreSilder.value[1],
+        customNumbers: this.selectedNumbers.toString()
       };
       this.$vux.loading.show("修改中...");
       this.$store
-        .dispatch("UpdateUserNromDefaultConfig", basicNorm)
+        .dispatch("UpdateUserNromConfig", userPlanNorm)
         .then(result => {
           const _this = this;
           this.$vux.loading.hide();
           this.$vux.confirm.show({
-            title: "修改默认指标",
-            content: result,
-            onCancel() {},
+            title: "修改计划指标",
+            content: `${result},是否立即计算该计划预测数据?`,
+            onCancel() {
+              _this.$router.push({ path: "/" });
+            },
             onConfirm() {
-              _this.$router.push({ path: "plan" });
+              _this.$vux.loading.show('计算中,请稍等...');
+              _this.$router.push({ path: "/" });
+              _this.$store.dispatch('UpdatePredictData', {normId: _this.normId}).then(result => {
+                  _this.predictDatas = result;
+                  _this.$vux.loading.hide();                 
+                }).catch(error => {
+                  _this.$vux.loading.hide();
+                  _this.$vux.alert.show(error.message);
+                })
             }
           });
         })
@@ -236,5 +271,17 @@ export default {
 }
 .basicnorm-btn {
   background-color: rgb(225, 6, 1) !important;
+}
+
+.demo1-item {
+  border: 1px solid #ececec;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 8px 11px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.demo1-item-selected {
+  border: 1px solid  rgb(225, 6, 1);
 }
 </style>

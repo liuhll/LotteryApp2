@@ -23,7 +23,7 @@
            <span class="tranck-number">{{predictData}}</span>
         </div>
         <div class="track-plan-option trank-second-right">
-          <span>数据</span>
+          <span @click="planNorm()">指标</span>
           <span @click="planDetail()">详情</span>
         </div>
         <div class="clear"></div>
@@ -55,6 +55,9 @@ export default {
     },
     planDetail() {
       this.$router.push({ name: 'predictdetail', params: { normId: this.trackingData.normId }});
+    },
+    planNorm() {
+         this.$router.push({ name: 'plannorm', params: { planId: this.trackingData.planId }});
     }
   },
   computed: {

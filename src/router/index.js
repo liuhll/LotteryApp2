@@ -172,6 +172,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      }, 
+      {
+        name: 'plannorm',
+        path: 'plannorm/:planId',
+        component: () => import('@/views/basicnorm/plannorm'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },

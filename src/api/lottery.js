@@ -91,9 +91,34 @@ export function getLotteryList() {
     })
 }
 
-export function getNormPlanConfig() {
+export function getNormPlanConfig(planId) {
     return request({
         url: '/v1/norm/normplanconfig',
-        method: 'GET'
+        method: 'GET',
+        params: planId
+    })
+}
+
+export function getUserPlanNorm(planId) {
+    return request({
+        url: '/v1/plan/userplannorm',
+        method: 'GET',
+        params: planId
+    })
+}
+
+export function updateUserNromConfig(userPlanNorm) {
+    return request({
+        url: '/v1/plan/userplannorm',
+        method: 'PUT',
+        data: userPlanNorm
+    })
+}
+
+export function updatePredictData(normId) {
+    return request({
+        url: '/v1/lottery/predictdata',
+        method: 'PUT',
+        data: normId
     })
 }
