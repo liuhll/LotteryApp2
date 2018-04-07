@@ -90,3 +90,10 @@ export function getLotteryList() {
         method: 'GET'
     })
 }
+
+export function getNormPlanConfig() {
+    return request({
+        url: '/v1/norm/normplanconfig',
+        method: 'GET'
+    })
+}

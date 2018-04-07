@@ -9,7 +9,8 @@ import {
     updateUserPlans,
     getUserNromDefaultConfig,
     updateUserNromDefaultConfig,
-    getLotteryList
+    getLotteryList,
+    getNormPlanConfig
     } from '@/api/lottery'
 
 const lotteryData = {
@@ -158,6 +159,20 @@ const lotteryData = {
        GetLotteryList({ }) {
            return new Promise((resolve, reject) => {
             getLotteryList().then(response => {
+                if (response.success) {
+                    const data = response.result;
+                    resolve(data)
+                } else {
+                    reject(response.error)
+                }
+            }).catch(error => {
+                reject(error)
+            })
+           })
+       },
+       GetNormPlanConfig() {
+        return new Promise((resolve, reject) => {
+            getNormPlanConfig().then(response => {
                 if (response.success) {
                     const data = response.result;
                     resolve(data)
