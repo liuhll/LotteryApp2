@@ -1,6 +1,6 @@
 <template>
     <div class="tracking-number-wrapper">
-      <scroller lock-x @on-scroll="onScroll"  height="100%" ref="scrollerEvent">
+      <scroller lock-x @on-scroll="onScroll"  height="88%" ref="scrollerEvent">
       <div class="box2">
         <predict-data-item v-for="(item,index) in predictDatas" :trackingData="item" :key="index">         
         </predict-data-item>

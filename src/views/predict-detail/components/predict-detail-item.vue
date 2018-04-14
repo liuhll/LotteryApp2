@@ -146,7 +146,7 @@ export default {
         const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         let count = Object.keys(this.predictData.statisticData.minorCycleStatistic).length % 4;
         count = Math.ceil(count) + 1;
-        const fixedH = 245 + 30 * count;
+        const fixedH = 165 + 30 * count;
         let height = h - fixedH;
         return height + 'px';
 
