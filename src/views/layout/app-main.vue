@@ -5,14 +5,27 @@
       <keep-alive>
           
       </keep-alive>       -->
-      <router-view class="router-view"></router-view>
+      <router-view class="router-view" v-on:changeTab="changeTab"></router-view>
     </transition>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'AppMain'
+  name: 'AppMain',
+  data() {
+    return {
+      num: 0
+    }
+  },
+  mounted(){
+    this.$emit('changeTab', this.num)
+  },
+  methods: {
+    changeTab(num) {
+      this.num = num
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

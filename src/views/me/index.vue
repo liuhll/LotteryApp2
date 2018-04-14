@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import { Grid, GridItem, Group, CellBox, XButton } from 'vux'
-import { throws } from 'assert';
+import { Grid, GridItem, Group, CellBox, XButton } from "vux";
+import { throws } from "assert";
 
 export default {
   components: {
@@ -68,42 +68,47 @@ export default {
   },
   data() {
     return {
-      userInfo: {},
-    }
+      userInfo: {}
+    };
   },
   created() {
     const _this = this;
-    _this.$store.dispatch('MeInfo').then(result => {
+    _this.$store.dispatch("MeInfo").then(result => {
       _this.userInfo = result;
-    })
+    });
+  },
+  mounted() {
+    this.$emit("changeTab", 2);
   },
   methods: {
     logout() {
-      this.$store.dispatch('Logout').then(result => {
+      this.$store.dispatch("Logout").then(result => {
         this.$vux.alert.show(result);
-        setTimeout(()=> {
-          this.$router.push({ path: '/login' })
-        },1500);
-        
+        setTimeout(() => {
+          this.$router.push({ path: "/login" });
+        }, 1500);
       });
     },
     bindProfile(profileType) {
-      this.$router.push({ name: 'bindprofile', params: { profileType: profileType } })
+      this.$router.push({
+        name: "bindprofile",
+        params: { profileType: profileType }
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="less">
 .app-main {
-  margin-bottom:10px;
+  margin-bottom: 10px;
   width: 100%;
   font-size: 14px;
 }
 .me-info {
-  display:flex;/*Flex布局*/
+  display: flex; /*Flex布局*/
   display: -webkit-flex; /* Safari */
-  align-items:center;/*指定垂直居中*/
+  align-items: center; /*指定垂直居中*/
 }
 .avatar-wrapper {
   float: left;
@@ -112,17 +117,16 @@ export default {
 .nick-wrapper {
   float: left;
   margin-left: 10px;
-
 }
 .nick-row {
   line-height: 14px;
   padding: 10px 12px;
 }
-.nick-row span:nth-child(2){
+.nick-row span:nth-child(2) {
   color: #888;
 }
 .weui-cell {
-  padding: 8px 12px!important;
+  padding: 8px 12px !important;
   font-size: 14px;
 }
 .clear {
@@ -133,17 +137,16 @@ export default {
   width: 100%;
 }
 .logout-btn {
-  background-color:rgb(225, 6, 1) !important
+  background-color: rgb(225, 6, 1) !important;
 }
 .bind-link a {
   margin-left: 9px;
   color: #757575;
   font-weight: 600;
-  text-decoration:underline
+  text-decoration: underline;
 }
 
 .bind-link a:active {
-  color: #EA0000;
+  color: #ea0000;
 }
-
 </style>

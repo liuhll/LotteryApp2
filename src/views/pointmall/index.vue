@@ -26,7 +26,10 @@ export default {
   components: {
     Grid,
     GridItem
-  }
+  },
+  mounted() {
+    this.$emit("changeTab", 1);
+  },
 }
 </script>
 

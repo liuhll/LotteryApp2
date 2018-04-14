@@ -22,6 +22,9 @@ export default {
       predictDatas: []
     }
   },
+  mounted() {
+    this.$emit("changeTab", 0);
+  },
   methods: {
     predictdatas(isNew) {
       if(!isNew) {
