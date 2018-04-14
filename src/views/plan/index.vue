@@ -39,7 +39,7 @@ export default {
         })
     },
     switchFormula() {
-       this.$vux.loading.show('切换公式,重新计算中...');
+       this.$vux.loading.show('搜索公式中...');
        this.$store.dispatch('UpdatePredictDatas').then(result => {
           this.predictDatas = result;
           this.$vux.loading.hide();
