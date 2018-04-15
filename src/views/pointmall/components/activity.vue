@@ -1,10 +1,10 @@
 <template>
    <div class="activity-wrapper">
        <ul>
-          <li>注册就送100点积分</li>
+          <li>注册即送100点积分</li>
           <li>每日签到送积分10点积分</li>
           <li>连续签到5天额外送50点积分</li>
-          <li>分享APP,好友注册即送20点积分(每天上限100点积分,同一IP只赠送一次)</li>
+          <li>分享APP,好友注册即送20点积分(每天上限100点积分,同一IP注册只赠送一次)</li>
        </ul>
    </div>
 </template>
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .activity-wrapper {
     margin-top: 5px;
 }
