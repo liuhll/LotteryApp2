@@ -11,137 +11,155 @@
     </div> 
     <div class="lottery-next-period-wrapper">
        <span class="lottery-cell">距离第{{finalLotteryData.nextPeriod}}开奖剩余:</span>
-       <span class="lottery-next-time" :remianSeconds="remianSeconds">{{remianTime}}</span>
+       <!-- <span class="lottery-next-time" :remianSeconds="remianSeconds">{{remianTime}}</span> -->
+       <clocker v-if="!isRunning" :time="nextLotteryTime" >
+          <span v-if="!isRunning&&isShowHour" class="time">%_H1%_H2</span>
+          <span v-if="!isRunning&&isShowHour" class="time">:</span>
+          <span class="time">%_M1%_M2</span>
+          <span class="time">:</span>
+          <span class="time">%_S1%_S2</span>        
+       </clocker>
+       <span v-if="isRunning" class="lottery-next-time">开奖中,请稍等...</span>
     </div>
   </div>
 </template>
 
 <script>
-import { convertToTime } from '@/utils/time';
-import LotteryRoundNumber from '@/components/lottery-round-number'
+import { convertToTime } from "@/utils/time";
+import LotteryRoundNumber from "@/components/lottery-round-number";
 import { setTimeout } from 'timers';
+import { Clocker } from "vux";
+import { formatDate } from "@/utils/time";
 
 export default {
   data() {
-      return {
-        finalLotteryData: {},
-        remianSeconds: 0,
-        countdownTimeOut: null
-      }
+    return {
+      finalLotteryData: {},
+      nextLotteryTime: null,
+      isRunning: false,
+      isShowHour: true
+    };
   },
   components: {
-    LotteryRoundNumber
+    LotteryRoundNumber,
+    Clocker
   },
   created() {
-    this.getFinalLotteryData();
-    this.$emit('lotterydata', true);
-    document.addEventListener('visibilitychange',this.onVisibilityChange)
+    this.getFinalLotteryData(false);
+    // document.addEventListener('visibilitychange',this.onVisibilityChange)
   },
   methods: {
-    getFinalLotteryData(needClearCountdownTimeOut) {  
-      const self = this;
-      if (self && !self._isDestroyed) {
-        self.$store.dispatch('GetFinallotterydata').then(result => {
-        self.finalLotteryData = result;    
-        if(result.isLotteryData) {           
-            self.remianSeconds = result.remainSeconds;       
-            if (needClearCountdownTimeOut && self.countdownTimeOut) {
-               self.$emit('lotterydata', true); 
-               clearTimeout(self.countdownTimeOut);
-               return;
-            }
-            self.nextLotteryCountdown();
-            self.$emit('lotterydata', false);
-        } else {
-           setTimeout(self.getFinalLotteryData, 3000,needClearCountdownTimeOut);
-           if (needClearCountdownTimeOut && self.countdownTimeOut) {
-              clearTimeout(self.countdownTimeOut);
-              return;
-           }
-        }        
-      });
+    getFinalLotteryData(isNew) {
+      // const self = this;
+      if (this && !this._isDestroyed) {
+        this.$store.dispatch("GetFinallotterydata").then(result => {
+          this.finalLotteryData = result;
+          if (!isNew) {
+            this.timeDiff(result.nextLotteryTime);
+            this.$emit("lotterydata", false);
+          }
+          if (result.isLotteryData) {
+            // self.remianSeconds = result.remainSeconds
+            this.nextLotteryTime = this.formatDate(result.nextLotteryTime);
+            this.timeDiff(result.nextLotteryTime);
+            this.$emit("lotterydata", true);
+            this.isRunning = false;
+          } else {
+            this.isRunning = true;
+            this.isShowHour = false;
+            setTimeout(this.getFinalLotteryData, 2000, isNew);
+          }
+        });
       }
-     
     },
-    nextLotteryCountdown() {
-        const self = this;
-        if (self && !self._isDestroyed) {
-            if (self.remianSeconds > 0) {
-                self.remianSeconds = self.remianSeconds - 1;
-                self.countdownTimeOut = setTimeout(self.nextLotteryCountdown, 1000);
-            } else {
-                self.getFinalLotteryData()
-            }
-            
-        }
+    onLotteryData() {
+      this.getFinalLotteryData(true);
+      this.isRunning = true;
     },
-    onVisibilityChange() {
-        this.getFinalLotteryData(true);
+    formatDate(time) {
+      let date = new Date(time);
+      return formatDate(date, "yyyy-MM-dd hh:mm");
+    },
+    timeDiff(nextLotteryTime) {
+      let diffMintue = parseInt(
+        (new Date(nextLotteryTime) - new Date()) / 1000 / 60
+      );
+      if (diffMintue >= 60) {
+        this.isShowHour = true;
+      } else {
+        this.isShowHour = false;
+      }
     }
   },
   computed: {
     remianTime() {
-        if (this.finalLotteryData.isLotteryData) {
-            return convertToTime(this.remianSeconds);
-        } else {
-            return '开奖中...';
-        }
-        
+      if (this.finalLotteryData.isLotteryData) {
+        return convertToTime(this.remianSeconds);
+      } else {
+        return "开奖中...";
+      }
     },
-    LotteryNumbers() {    
-        if (this.finalLotteryData.data) {        
-          const lotteryDatas = this.finalLotteryData.data.split(',');
-          return lotteryDatas;
-        } 
-        return [];
+    LotteryNumbers() {
+      if (this.finalLotteryData.data) {
+        const lotteryDatas = this.finalLotteryData.data.split(",");
+        return lotteryDatas;
+      }
+      return [];
     },
     numberCount() {
-       return this.LotteryNumbers.length;
+      return this.LotteryNumbers.length;
     }
   }
-  
-}
+};
 </script>
 
 
 <style lang="less" scoped>
 .lt-run-wrapper {
-    height: 80px;
-    width: 100%;
-    padding: 0 5px;
-    position: fixed;
-    background-color: #f4f4f4
+  height: 80px;
+  width: 100%;
+  padding: 0 5px;
+  position: fixed;
+  background-color: #f4f4f4;
 }
 
 .lottery-number-area {
-    width: 100%; 
-    padding: 2px 0 0 8px;
+  width: 100%;
+  padding: 2px 0 0 8px;
 }
 
 .lottery-cell {
-    padding: 2px 0 1px 8px;
-    line-height: 22px;
-    font-weight: 500;
-    font-size: 12px;
-    color: #ff5500
+  padding: 2px 0 1px 8px;
+  line-height: 22px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #ff5500;
 }
 
 .lottery-next-time {
-  display :inline-block;
-  background-color :#EA0000;
-  margin-left :10px;
-  width :80px;
-  height :20px;
-  line-height :20px;
+  display: inline-block;
+  background-color: #ea0000;
+  margin-left: 10px;
+  width: 120px;
+  height: 20px;
+  line-height: 20px;
   vertical-align: middle;
   border-radius: 20px;
-  text-align :center;
-  font-size :10px;
-  color :#fff;
+  text-align: center;
+  font-size: 10px;
+  color: #fff;
+}
 
+.time {
+  background-color: #ea0000;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  padding: 0 2px;
+  border-radius: 3px;
 }
 
 .clear {
-    clear: both;
+  clear: both;
 }
 </style>
