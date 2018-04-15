@@ -181,6 +181,15 @@ const constantRouterMap = [
           showtabbar: false,
           showBack: true
         }
+      },
+      {
+        name: 'authinfo',
+        path: 'authinfo',
+        component: () => import('@/views/me/authinfo'),
+        meta: {
+          showtabbar: false,
+          showBack: true
+        }
       }
     ]
   },

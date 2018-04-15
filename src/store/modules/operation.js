@@ -1,7 +1,8 @@
 import {
     getSignedInfo,
     signed,
-    signedlist
+    signedlist,
+    userAuth
 
   } from '@/api/operation'
 
@@ -38,6 +39,20 @@ const operationData = {
         GetSignedList({}) {
             return new Promise((resolve, reject) => {
                 signedlist().then(response => {
+                     if (response.success) {
+                         const data = response.result;
+                         resolve(data);
+                     } else {
+                         reject(response.error)
+                     }
+                 }).catch(error => {
+                     reject(error);
+                 })
+             });
+        },
+        GetUserAuth({}) {
+            return new Promise((resolve, reject) => {
+                userAuth().then(response => {
                      if (response.success) {
                          const data = response.result;
                          resolve(data);

@@ -24,7 +24,7 @@
       <cell-box>
         购买授权
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="authinfo">
         我的授权
       </cell-box>
       <cell-box is-link link="customservice">

@@ -20,3 +20,10 @@ export function signedlist() {
         method: 'GET'
     });
 }
+
+export function userAuth() {
+    return request({
+        url: '/v1/sell/userauth',
+        method: 'GET'
+    });
+}

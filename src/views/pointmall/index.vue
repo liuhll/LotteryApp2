@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       topic: {
-        text: "我的积分",
+        text: "积分信息",
         index: 1
       },
       siged: {
