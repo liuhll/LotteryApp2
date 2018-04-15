@@ -13,3 +13,10 @@ export function signed() {
         method: 'POST'
     });
 }
+
+export function signedlist() {
+    return request({
+        url: '/v1/operation/signedlist',
+        method: 'GET'
+    });
+}

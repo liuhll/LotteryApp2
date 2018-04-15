@@ -149,9 +149,7 @@ export default {
         const fixedH = 165 + 30 * count;
         let height = h - fixedH;
         return height + 'px';
-
-    }
-    
+    }   
   },
   methods: {
     nextLotteryCountdown() {
