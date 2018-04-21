@@ -24,14 +24,14 @@
         <span class="lottery-small-period">{{currentSmallPeriod}}</span>
         <span class="lottery-next-period">{{nextPeriod}}期</span>
         <!-- <span class="lottery-next-time" :remainSeconds="remainSeconds">{{remianTime}}</span> -->
-        <clocker v-if="!isRunning" :time="nextLotteryTime" >
-          <span v-if="!isRunning&&isShowHour" class="time">%_H1%_H2</span>
-          <span v-if="!isRunning&&isShowHour" class="time">:</span>
+        <clocker v-if="!isRunning" :time="nextLotteryTime" v-on:on-finish="onPredictDetailData">
+          <span class="time">%_H1%_H2</span>
+          <span class="time">:</span>
           <span class="time">%_M1%_M2</span>
           <span class="time">:</span>
           <span class="time">%_S1%_S2</span>        
        </clocker>
-       <span v-if="isRunning" class="lottery-next-time">开奖中,请稍等...</span>
+       <span v-if="isRunning" class="lottery-next-time">开奖中...</span>
       </div>
       <div class="clear"></div>
     </div>   
@@ -94,6 +94,7 @@ import { convertToTime } from "@/utils/time";
 import LotteryRoundNumber from "@/components/lottery-round-number";
 import { Scroller, LoadMore, CellBox, Clocker } from "vux";
 import { formatDate } from "@/utils/time";
+import { clearTimeout } from 'timers';
 export default {
   props: {
     predictDetailData: {
@@ -110,20 +111,19 @@ export default {
   },
   data() {
     return {
-      remainSeconds: 0,
       predictData: {},
       nextLotteryTime: null,
       isRunning: false,
-      isShowHour: true
+      isShowHour: true,
+      timeout: null
     };
   },
   created() {
-    this.remainSeconds = this.predictDetailData.finalLotteryData.remainSeconds;
     this.predictData = this.predictDetailData;
     this.nextLotteryTime = this.formatDate(
       this.predictDetailData.finalLotteryData.nextLotteryTime
     );
-    this.getPredictDetailData();
+    this.getPredictDetailData1();
     // document.addEventListener('visibilitychange',this.onVisibilityChange)
   },
   computed: {
@@ -156,13 +156,6 @@ export default {
       const nextPeriod = this.predictData.finalLotteryData.nextPeriod.toString();
       return nextPeriod.substr(nextPeriod.length - 3, 3);
     },
-    remianTime() {
-      if (this.remainSeconds > 0) {
-        return convertToTime(this.remainSeconds);
-      } else {
-        return "开奖中...";
-      }
-    },
     detailHeight() {
       const h =
         window.innerHeight ||
@@ -180,20 +173,56 @@ export default {
   methods: {
     getPredictDetailData() {
       const self = this;
+      if (self.timeout) {
+        clearTimeout(self.timeout)
+      }
+      self.$vux.loading.show('开奖中...');
       if (self && !self._isDestroyed) {
         self.$store
           .dispatch("GetPredictDetailData", self.predictData.normId)
           .then(result => {
             if (result.finalLotteryData.isLotteryData) {
+              self.$vux.loading.show('计算中...');
               self.predictData = result;
-              self.nextLotteryTime = self.formatDate(
-                result.finalLotteryData.nextLotteryTime
-              ); //result.finalLotteryData.remainSeconds;
+              self.nextLotteryTime = self.formatDate(result.finalLotteryData.nextLotteryTime); //result.finalLotteryData.remainSeconds;
+              self.$emit("lotterydata", true);
+              self.isRunning = false;
+              self.$vux.loading.hide();
             } else {
-              setTimeout(self.getPredictDetailData, 2000);
+              self.timeout = setTimeout(self.getPredictDetailData, 3000);
+              self.isRunning = true;
             }
           });
       }
+    },
+    getPredictDetailData1() {
+      const _this = this
+      _this.$store.dispatch("GetFinallotterydata").then(result => {
+        _this.$vux.loading.show('开奖中...');
+        if (result.isLotteryData) {
+          if (_this && !_this._isDestroyed) {
+            _this.$store
+            .dispatch("GetPredictDetailData", _this.predictData.normId)
+            .then(result1 => {
+               _this.$vux.loading.show('计算中...');
+               _this.predictData = result1;
+               _this.nextLotteryTime = _this.formatDate(result1.finalLotteryData.nextLotteryTime); //result.finalLotteryData.remainSeconds;
+               _this.$emit("lotterydata", true);
+               _this.isRunning = false;
+               _this.$vux.loading.hide();
+            }) 
+          }
+        } else {
+          setTimeout(_this.getPredictDetailData1, 3000);
+          _this.isRunning = true;
+        }
+        
+      })
+    },
+
+    onPredictDetailData() {
+      this.getPredictDetailData1();
+      this.isRunning = true;
     },
     predictedResult(predictedResult) {
       if (predictedResult === 0) {

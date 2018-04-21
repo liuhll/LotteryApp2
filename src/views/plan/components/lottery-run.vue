@@ -12,9 +12,9 @@
     <div class="lottery-next-period-wrapper">
        <span class="lottery-cell">距离第{{finalLotteryData.nextPeriod}}开奖剩余:</span>
        <!-- <span class="lottery-next-time" :remianSeconds="remianSeconds">{{remianTime}}</span> -->
-       <clocker v-if="!isRunning" :time="nextLotteryTime" >
-          <span v-if="!isRunning&&isShowHour" class="time">%_H1%_H2</span>
-          <span v-if="!isRunning&&isShowHour" class="time">:</span>
+       <clocker v-if="!isRunning" :time="nextLotteryTime" v-on:on-finish="onLotteryData">
+          <span class="time">%_H1%_H2</span>
+          <span class="time">:</span>
           <span class="time">%_M1%_M2</span>
           <span class="time">:</span>
           <span class="time">%_S1%_S2</span>        
@@ -51,19 +51,18 @@ export default {
   methods: {
     getFinalLotteryData(isNew) {
       // const self = this;
+      this.$vux.loading.show('开奖中...');
       if (this && !this._isDestroyed) {
         this.$store.dispatch("GetFinallotterydata").then(result => {
           this.finalLotteryData = result;
-          if (!isNew) {
-            this.timeDiff(result.nextLotteryTime);
-            this.$emit("lotterydata", false);
-          }
           if (result.isLotteryData) {
+             this.$vux.loading.show('计算中...');
             // self.remianSeconds = result.remainSeconds
             this.nextLotteryTime = this.formatDate(result.nextLotteryTime);
             this.timeDiff(result.nextLotteryTime);
             this.$emit("lotterydata", true);
             this.isRunning = false;
+            this.$vux.loading.hide();
           } else {
             this.isRunning = true;
             this.isShowHour = false;
