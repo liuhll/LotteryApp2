@@ -8,7 +8,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import './permission' 
+import './permission'
 
 
 // plugins
@@ -37,12 +37,12 @@ new Vue({
 
 /* eslint-disable no-new */
 // document.addEventListener('deviceready', () => {
-//   new Vue({
-//       el: '#app',
-//       router,
-//       store,
-//       template: '<App/>',
-//       components: { App }
-//   })
-//   window.navigator.splashscreen.hide()
+//     new Vue({
+//         el: '#app',
+//         router,
+//         store,
+//         template: '<App/>',
+//         components: { App }
+//     })
+//     window.navigator.splashscreen.hide()
 // }, false);

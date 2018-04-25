@@ -21,7 +21,7 @@
           <div class="clear"></div>
         </div>
       </cell-box>
-      <cell-box>
+      <cell-box is-link link="purchase">
         购买授权
       </cell-box>
       <cell-box is-link link="authinfo">

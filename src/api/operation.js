@@ -27,3 +27,35 @@ export function userAuth() {
         method: 'GET'
     });
 }
+
+export function goodsList(sellType) {
+    return request({
+        url: '/v1/sell/goodslist',
+        method: 'GET',
+        params: sellType
+    });
+}
+
+export function order(goodsInfo) {
+    return request({
+        url: '/v1/sell/order',
+        method: 'POST',
+        data: goodsInfo
+    });
+}
+
+export function getOrder(orderNo) {
+    return request({
+        url: '/v1/sell/order',
+        method: 'GET',
+        params: { orderNo }
+    });
+}
+
+export function pay(payinfo) {
+    return request({
+        url: '/v1/sell/pay',
+        method: 'POST',
+        data: payinfo
+    });
+}
