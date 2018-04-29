@@ -198,18 +198,15 @@ export default {
     getPredictDetailData1() {
       const _this = this
       _this.$store.dispatch("GetFinallotterydata").then(result => {
-        _this.$vux.loading.show('开奖中...');
         if (result.isLotteryData) {
           if (_this && !_this._isDestroyed) {
             _this.$store
             .dispatch("GetPredictDetailData", _this.predictData.normId)
             .then(result1 => {
-               _this.$vux.loading.show('计算中...');
                _this.predictData = result1;
                _this.nextLotteryTime = _this.formatDate(result1.finalLotteryData.nextLotteryTime); //result.finalLotteryData.remainSeconds;
                _this.$emit("lotterydata", true);
                _this.isRunning = false;
-               _this.$vux.loading.hide();
             }) 
           }
         } else {

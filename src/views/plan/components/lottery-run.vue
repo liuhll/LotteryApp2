@@ -51,18 +51,16 @@ export default {
   methods: {
     getFinalLotteryData(isNew) {
       // const self = this;
-      this.$vux.loading.show('开奖中...');
+      // this.$vux.loading.show('开奖中...');
       if (this && !this._isDestroyed) {
         this.$store.dispatch("GetFinallotterydata").then(result => {
           this.finalLotteryData = result;
           if (result.isLotteryData) {
-             this.$vux.loading.show('计算中...');
-            // self.remianSeconds = result.remainSeconds
             this.nextLotteryTime = this.formatDate(result.nextLotteryTime);
             this.timeDiff(result.nextLotteryTime);
             this.$emit("lotterydata", true);
             this.isRunning = false;
-            this.$vux.loading.hide();
+           
           } else {
             this.isRunning = true;
             this.isShowHour = false;

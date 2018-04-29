@@ -1,6 +1,6 @@
 <template>
   <group>
-    <cell title="售价" :value="orderPrice"></cell>
+    <cell title="售价" :value="orderPriceDesc"></cell>
     <cell-form-preview :list="list"></cell-form-preview>
     <cell title="支付方式">
       <checker  radio-required default-item-class="pay-item"  v-model="isType" selected-item-class="pay-item-selected">
@@ -74,7 +74,7 @@ export default {
         .then(result => {
           _this.$router.push({
             name: "pay",
-            params: { payinfo: result }
+            params: { payinfo: result, orderNo: salesOrderNo.value }
         });           
         });
     },

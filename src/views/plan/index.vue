@@ -27,8 +27,10 @@ export default {
   },
   methods: {
     predictdatas(isNew) {
+      this.$vux.loading.show('计算中...');
       this.$store.dispatch('GetPredictDatas').then(result => {
           this.predictDatas = result;
+           this.$vux.loading.hide();
         }).catch(error => {          
           this.$vux.alert.show(error.message);
         })
