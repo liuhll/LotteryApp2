@@ -1,10 +1,10 @@
 <template>
    <div class="activity-wrapper">
        <ul>
-          <li>注册即送100点积分</li>
-          <li>每日签到送积分10点积分</li>
-          <li>连续签到5天额外送50点积分</li>
-          <li>分享APP,好友注册即送20点积分(每天上限100点积分,同一IP注册只赠送一次)</li>
+          <li>注册即送<span>100</span>点积分</li>
+          <li>每日签到送积分<span>10</span>点积分</li>
+          <li>连续签到<span>5</span>天额外送<span>100</span>点积分</li>
+          <li>分享APP,好友注册即送<span>20</span>点积分(每天上限<span>100</span>点积分,同一IP注册只赠送一次)</li>
        </ul>
    </div>
 </template>
@@ -32,5 +32,9 @@ export default {
     color: #333;
     padding: 5px 0px;
     list-style: decimal;
+}
+
+.activity-wrapper ul li span {
+  color: #00e3e3
 }
 </style>
