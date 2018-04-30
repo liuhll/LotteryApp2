@@ -1,5 +1,5 @@
 <template>
-  <group title="在线客户">       
+  <group title="在线客服">       
       <cell-box>
         QQ: 1029765111
       </cell-box>

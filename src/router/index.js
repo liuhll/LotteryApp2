@@ -21,21 +21,30 @@ const constantRouterMap = [{
                 component: () =>
                     import ('@/views/plan/index'),
                 meta: {
-                    showtabbar: true
+                    showtabbar: true,
+                    more: {
+                        headerTitle: '计划分析'
+                    }
                 }
             }, {
                 path: 'pointmall',
                 component: () =>
                     import ('@/views/pointmall/index'),
                 meta: {
-                    showtabbar: true
+                    showtabbar: true,
+                    more: {
+                        headerTitle: '积分商城'
+                    }
                 }
             }, {
                 path: 'me',
                 component: () =>
                     import ('@/views/me/index'),
                 meta: {
-                    showtabbar: true
+                    showtabbar: true,
+                    more: {
+                        headerTitle: '我的'
+                    }
                 }
             },
             {
@@ -44,7 +53,10 @@ const constantRouterMap = [{
                     import ('@/views/lottery-history/index'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: {
+                        headerTitle: '历史开奖'
+                    }
                 }
             },
             {
@@ -54,7 +66,10 @@ const constantRouterMap = [{
                     import ('@/views/predict-detail/index'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: {
+                        headerTitle: '计划详情'
+                    }
                 }
             },
             {
@@ -72,7 +87,8 @@ const constantRouterMap = [{
                         context: '提交',
                         event: {
                             func: 'submitPlans'
-                        }
+                        },
+                        headerTitle: '选择计划'
                     }
                 }
             },
@@ -83,7 +99,8 @@ const constantRouterMap = [{
                     import ('@/views/basicnorm/index'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '默认基础指标' }
                 }
             },
             {
@@ -93,7 +110,8 @@ const constantRouterMap = [{
                     import ('@/views/data-analyse/index'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '数据分析' }
                 }
             },
             {
@@ -103,7 +121,8 @@ const constantRouterMap = [{
                     import ('@/views/register/index'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '用户注册' }
                 }
             },
             {
@@ -113,7 +132,8 @@ const constantRouterMap = [{
                     import ('@/views/retrieve-password/index'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '找回密码' }
                 }
             },
             {
@@ -142,7 +162,8 @@ const constantRouterMap = [{
                     import ('@/views/me/resetPwd'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '重置密码' }
                 }
             },
             {
@@ -152,7 +173,8 @@ const constantRouterMap = [{
                     import ('@/views/me/opinion'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '意见反馈' }
                 }
             },
             {
@@ -162,7 +184,8 @@ const constantRouterMap = [{
                     import ('@/views/me/onlinehelp'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '在线帮助' }
                 }
             },
             {
@@ -172,7 +195,8 @@ const constantRouterMap = [{
                     import ('@/views/me/aboutUs'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '关于我们' }
                 }
             },
             {
@@ -182,7 +206,8 @@ const constantRouterMap = [{
                     import ('@/views/me/customService'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '客服信息' }
                 }
             },
             {
@@ -192,7 +217,8 @@ const constantRouterMap = [{
                     import ('@/views/me/version'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '版本信息' }
                 }
             },
             {
@@ -202,7 +228,8 @@ const constantRouterMap = [{
                     import ('@/views/basicnorm/plannorm'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '计划指标配置' }
                 }
             },
             {
@@ -212,7 +239,8 @@ const constantRouterMap = [{
                     import ('@/views/me/authinfo'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '我的授权' }
                 }
             }, {
                 name: 'purchase',
@@ -221,7 +249,8 @@ const constantRouterMap = [{
                     import ('@/views/auth/goods-list'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '授权列表' }
                 }
             }, {
                 name: 'orderinfo',
@@ -230,7 +259,8 @@ const constantRouterMap = [{
                     import ('@/views/auth/orderinfo'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '商品信息' }
                 }
             }, {
                 name: 'pay',
@@ -239,7 +269,8 @@ const constantRouterMap = [{
                     import ('@/views/auth/pay'),
                 meta: {
                     showtabbar: false,
-                    showBack: true
+                    showBack: true,
+                    more: { headerTitle: '在线支付' }
                 }
             }
         ]

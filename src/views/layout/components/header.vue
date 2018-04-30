@@ -3,7 +3,8 @@
     :left-options="{showBack: showBack}" 
    
     style="width:100%;position:fixed;left:0;top:0;z-index:100;
-    background-color:#E10601">计划
+    background-color:#E10601">
+      {{more.headerTitle}}
      <div v-if="more.show" slot="right" @click="clickMore(more.event)">
       <a v-if="more.type==='text'">
         {{more.context}}
@@ -30,6 +31,7 @@ export default {
       type: Object
     }
   },
+  
   components: {
       XHeader
   },
@@ -87,8 +89,6 @@ export default {
         
       });
     }
-  },
-  computed: {
   }
 }
 </script>

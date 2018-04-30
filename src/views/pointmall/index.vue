@@ -76,6 +76,7 @@ export default {
     this.$emit("changeTab", 1);
   },
   created() {
+    this.$route.params.headerTitle = '积分商城'
     this.$vux.loading.show("加载中...");
     this.getSignedInfo();
     this.getPointsRecord()

@@ -25,6 +25,13 @@ export default {
   mounted() {
     this.$emit("changeTab", 0);
   },
+  created() {
+    const _this = this
+    _this.$store.dispatch('GetUserInfo').then(result => {
+       _this.$route.meta.more.headerTitle = result.result.lotteryInfo.name + '计划分析'
+    })
+   
+  },
   methods: {
     predictdatas(isNew) {
       this.$vux.loading.show('计算中...');
