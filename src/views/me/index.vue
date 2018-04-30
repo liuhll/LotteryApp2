@@ -21,30 +21,38 @@
           <div class="clear"></div>
         </div>
       </cell-box>
-      <cell-box is-link link="purchase">
+      <cell is-link link="purchase" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/purchase.svg">
         购买授权
-      </cell-box>
-      <cell-box is-link link="authinfo">
+      </cell>
+      <cell is-link link="authinfo" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/myauth.svg">
         我的授权
-      </cell-box>
-      <cell-box is-link link="customservice">
+      </cell>
+      <cell is-link link="customservice" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/customservice.svg">
         在线客服
-      </cell-box>
-      <cell-box is-link :link="{ path:'resetpwd', params: this.userInfo}">
+      </cell>
+      <cell is-link :link="{ path:'resetpwd', params: this.userInfo}" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/pwd.svg">
         密码管理
-      </cell-box>
-      <cell-box is-link link="opinion">
+      </cell>
+      <cell is-link link="opinion" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/opinion.svg">
         意见反馈
-      </cell-box>
-      <cell-box is-link link="aboutus">
+      </cell>
+      <cell is-link link="aboutus" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/aboutus.svg">
         关于我们
-      </cell-box>
-      <cell-box is-link link="onlinehelp">
+      </cell>
+      <cell is-link link="onlinehelp" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/online-help.svg">
         在线帮助
-      </cell-box>
-      <cell-box is-link link="version">
+      </cell>
+      <cell is-link link="version" value-align="left">
+        <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/images/me/update.svg">
         检查更新
-      </cell-box>
+      </cell>
       <cell-box>
         <div slot="default" class="logout-wrapper">
           <x-button type="primary" action-type="button" class="logout-btn"  @click.native="logout()">退出登录</x-button>
@@ -55,7 +63,7 @@
 </template>
 
 <script>
-import { Grid, GridItem, Group, CellBox, XButton } from "vux";
+import { Grid, GridItem, Group, CellBox, XButton, Cell } from "vux";
 import { throws } from "assert";
 
 export default {
@@ -64,7 +72,8 @@ export default {
     GridItem,
     Group,
     CellBox,
-    XButton
+    XButton,
+    Cell
   },
   data() {
     return {
@@ -144,6 +153,10 @@ export default {
   color: #757575;
   font-weight: 600;
   text-decoration: underline;
+}
+
+.vux-cell-primary {
+  color: #333 !important;
 }
 
 .bind-link a:active {

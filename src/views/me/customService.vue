@@ -7,7 +7,7 @@
         QQ群: 1029765111
       </cell-box>
        <cell-box>
-        微信: clmeng
+        微信: clmeng-service
        </cell-box>
        <cell-box class="memo"><strong>备注:</strong> 请您在添加客服时，备注上您的订单号，否则我们不会通过您的申请。</cell-box>
   </group>
