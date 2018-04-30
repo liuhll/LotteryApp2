@@ -90,7 +90,7 @@ export default {
         } else {
             account = this.userInfo.email.account;
         }
-        this.$store.dispatch('GetAppInfo',this.opinion).then(data => {
+        this.$store.dispatch('AddOpinion',this.opinion).then(data => {
             this.$vux.loading.hide();
             this.$vux.alert.show(data);
             this.countdownTimeOut = setTimeout(this.resetTdentifyCodeText,1000);
