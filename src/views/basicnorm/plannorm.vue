@@ -38,7 +38,17 @@
 </template>
 
 <script>
-import { XInput, Group, XButton, Cell, CellBox, Selector, Box, Checker, CheckerItem } from "vux";
+import {
+  XInput,
+  Group,
+  XButton,
+  Cell,
+  CellBox,
+  Selector,
+  Box,
+  Checker,
+  CheckerItem
+} from "vux";
 import VueSlider from "vue-slider-component";
 import { debug } from "util";
 export default {
@@ -132,38 +142,40 @@ export default {
       this.canSave = true;
     },
     getNormPlanConfig() {
-      this.$store.dispatch("GetNormPlanConfig", { planId: this.planId }).then(result => {
-        this.forecastCounts = result.forecastCounts;
-        this.planCycles = result.planCycles;
-      })
+      this.$store
+        .dispatch("GetNormPlanConfig", { planId: this.planId })
+        .then(result => {
+          this.forecastCounts = result.forecastCounts;
+          this.planCycles = result.planCycles;
+        });
     },
     getUserPlanNorm() {
-      this.$store.dispatch("GetUserPlanNorm",{ planId: this.planId }).then(result => {
-        this.rightSilder.value.push(result.minRightSeries); //result.minRightSeries
-        this.rightSilder.value.push(result.maxRightSeries); //result.maxRightSeries
-        this.errorSilder.value.push(result.minErrorSeries);
-        this.errorSilder.value.push(result.maxErrorSeries);
-        this.expectScoreSilder.value.push(result.expectMinScore);
-        this.expectScoreSilder.value.push(result.expectMaxScore);
-        this.planCycle = result.planCycle;
-        this.forecastCount = result.forecastCount;
-        this.historyCount = result.historyCount;
-        this.unitHistoryCount = result.unitHistoryCount;
-        this.lookupPeriodCount = result.lookupPeriodCount;
-        this.isShowLotteryNumbers = result.isShowLotteryNumbers;
-        this.lotteryNumbers = result.lotteryNumbers;
-        this.normId = result.id;
-        for(var i in result.lotteryNumbers) {           
+      this.$store
+        .dispatch("GetUserPlanNorm", { planId: this.planId })
+        .then(result => {
+          this.rightSilder.value.push(result.minRightSeries); //result.minRightSeries
+          this.rightSilder.value.push(result.maxRightSeries); //result.maxRightSeries
+          this.errorSilder.value.push(result.minErrorSeries);
+          this.errorSilder.value.push(result.maxErrorSeries);
+          this.expectScoreSilder.value.push(result.expectMinScore);
+          this.expectScoreSilder.value.push(result.expectMaxScore);
+          this.planCycle = result.planCycle;
+          this.forecastCount = result.forecastCount;
+          this.historyCount = result.historyCount;
+          this.unitHistoryCount = result.unitHistoryCount;
+          this.lookupPeriodCount = result.lookupPeriodCount;
+          this.isShowLotteryNumbers = result.isShowLotteryNumbers;
+          this.lotteryNumbers = result.lotteryNumbers;
+          this.normId = result.id;
+          for (var i in result.lotteryNumbers) {
             if (result.lotteryNumbers[i].isSelected) {
-               this.selectedNumbers.push(result.lotteryNumbers[i].number)
+              this.selectedNumbers.push(result.lotteryNumbers[i].number);
             }
-        }
-        this.canSave = true;
-      });
+          }
+          this.canSave = true;
+        });
     },
-    getCustomNumbers() {
-
-    },
+    getCustomNumbers() {},
     saveUserNorm() {
       let userPlanNorm = {
         planId: this.planId,
@@ -186,36 +198,46 @@ export default {
         .then(result => {
           const _this = this;
           this.$vux.loading.hide();
-          this.$vux.confirm.show({
-            title: "修改计划指标",
-            content: `${result},是否立即计算该计划预测数据?`,
-            onCancel() {
-              _this.$router.push({ path: "/" });
-            },
-            onConfirm() {
-              _this.$vux.loading.show('计算中,请稍等...');
-              _this.$router.push({ path: "/" });
-              _this.$store.dispatch('UpdatePredictData', {normId: _this.normId}).then(result => {
-                  _this.predictDatas = result;
-                  _this.$vux.loading.hide();                 
-                }).catch(error => {
-                  _this.$vux.loading.hide();
-                  _this.$vux.alert.show(error.message);
-                })
-            }
-          });
+          if (result.canSwitchFormula) {
+            _this.$vux.confirm.show({
+              title: "修改计划指标",
+              content: result.tips,
+              onCancel() {
+                _this.$router.push({ path: "/" });
+              },
+              onConfirm() {
+                _this.$vux.loading.show("计算中,请稍等...");
+                _this.$router.push({ path: "/" });
+                _this.$store
+                  .dispatch("UpdatePredictData", { normId: _this.normId })
+                  .then(result => {
+                    _this.predictDatas = result;
+                    _this.$vux.loading.hide();
+                  })
+                  .catch(error => {
+                    _this.$vux.loading.hide();
+                    _this.$vux.alert.show(error.message);
+                  });
+              }
+            });
+          } else {
+            _this.$vux.alert.show({
+              title: "修改计划指标",
+              content: result.tips,
+            }) 
+          }
         })
         .catch(error => {
           const _this = this;
           this.$vux.loading.hide();
           this.$vux.confirm.show({
-            title: "修改基础指标",
-            content: error.message + ",是否需要购买授权？",
+            title: "购买授权",
+            content: error.message,
             onConfirm() {
-              //_this.$router.push({ path: 'plan' })
+              _this.$router.push({ path: "/purchase" });
             },
             onCancel() {
-              _this.$router.push({ path: "plan" });
+              _this.$router.push({ path: "/plan" });
             }
           });
         });
@@ -282,6 +304,6 @@ export default {
   font-weight: 600;
 }
 .demo1-item-selected {
-  border: 1px solid  rgb(225, 6, 1);
+  border: 1px solid rgb(225, 6, 1);
 }
 </style>

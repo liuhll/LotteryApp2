@@ -174,13 +174,13 @@ export default {
           const _this = this;
           this.$vux.loading.hide();
           this.$vux.confirm.show({
-            title: "修改基础指标",
-            content: error.message + ",是否需要购买授权？",
+            title: "购买授权",
+            content: error.message,
             onConfirm() {
-              //_this.$router.push({ path: 'plan' })
+              _this.$router.push({ path: '/purchase' })
             },
             onCancel() {
-              _this.$router.push({ path: "plan" });
+              _this.$router.push({ path: "/plan" });
             }
           });
         });

@@ -10,13 +10,14 @@
       <grid-item label="基础指标" link="/basicnorm">
         <img slot="icon" src="../../../assets/images/lotteryfunc/norm.svg">
       </grid-item>
-      <grid-item label="数据分析" link="/dataanalyse">
+      <!-- <grid-item label="数据分析" link="/dataanalyse"> -->
+      <grid-item label="数据分析" @click.native="dataAnalyse()">
         <img slot="icon" src="../../../assets/images/lotteryfunc/analyse.svg">
       </grid-item>
       <grid-item label="历史开奖" link="/history">
         <img slot="icon" src="../../../assets/images/lotteryfunc/lotteryhistroy.svg">
       </grid-item>
-      <grid-item label="购买授权">
+      <grid-item label="购买授权" link="/purchase">
         <img slot="icon" src="../../../assets/images/lotteryfunc/authorize.svg">
       </grid-item>
     </grid>
@@ -43,6 +44,12 @@ export default {
          onCancel() {
           
          }
+       })
+    },
+    dataAnalyse() {
+       this.$vux.alert.show({
+         title: '数据分析',
+         content: '感谢您的支持,请稍等,下个版本即将来袭哦。'
        })
     }
   }

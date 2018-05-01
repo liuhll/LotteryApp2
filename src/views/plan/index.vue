@@ -22,9 +22,6 @@ export default {
       predictDatas: []
     }
   },
-  mounted() {
-    this.$emit("changeTab", 0);
-  },
   created() {
     const _this = this
     _this.$store.dispatch('GetUserInfo').then(result => {
@@ -48,8 +45,18 @@ export default {
           this.predictDatas = result;
           this.$vux.loading.hide();
         }).catch(error => {
-          this.$vux.loading.hide();
-          this.$vux.alert.show(error.message);
+          let _this = this
+          _this.$vux.loading.hide();
+          _this.$vux.confirm.show({
+           title: '购买授权',
+           content: error.message,
+           onConfirm() {            
+            _this.$router.push({ path: '/purchase' })
+           },
+          onCancel() {
+           
+          }
+         })
         })
     }
   }
