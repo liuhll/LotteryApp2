@@ -1,20 +1,20 @@
 <template>
   <div class="app-wrapper">
     <lt-header :showBack="showBack" :more="more"></lt-header>
-    <app-main class="app-main"  v-on:changeTab="changeTab"></app-main>
+    <app-main class="app-main"></app-main>
     <!-- <lt-tabbar v-show="isShowTabBar()" :num="num"></lt-tabbar> -->
     <tabbar v-show="isShowTabBar()" style="position:absolute">
-      <tabbar-item :selected="index==0"  link="/plan">
+      <tabbar-item :selected="isSelectedTab('/plan')"  link="/plan">
         <img slot="icon" src="../../assets/images/plan.svg">
         <img slot="icon-active" src="../../assets/images/plan-active.svg">      
         <span slot="label">计划</span>
       </tabbar-item>
-      <tabbar-item :selected="index==1" link="/pointmall">
+      <tabbar-item :selected="isSelectedTab('/pointmall')" link="/pointmall">
         <img slot="icon" src="../../assets/images/integralmall.svg">
         <img slot="icon-active" src="../../assets/images/integralmall-active.svg">   
         <span slot="label">积分商城</span>
       </tabbar-item>
-      <tabbar-item :selected="index==2" link="/me">
+      <tabbar-item :selected="isSelectedTab('/me')" link="/me">
         <img slot="icon" src="../../assets/images/me.svg">
         <img slot="icon-active" src="../../assets/images/me-active.svg">   
         <span slot="label">我</span>
@@ -26,6 +26,7 @@
 import { ViewBox,Tabbar,TabbarItem } from 'vux'
 import LtHeader from './components/header'
 import AppMain from './app-main'
+import { fail } from 'assert';
 
 export default {
   name: 'layout',
@@ -70,6 +71,12 @@ export default {
     },
     changeTab(num) {
       this.index = num
+    },
+    isSelectedTab(path) {
+       if (this.$route.path == path) {
+         return true
+       }
+       return false
     }
   }
 }
