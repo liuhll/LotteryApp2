@@ -24,6 +24,7 @@
         </div>
         <div class="track-plan-option trank-second-right">
           <span @click="planNorm()">指标</span>
+          <span @click="switchFormula()">切换</span>
           <span @click="planDetail()">详情</span>
         </div>
         <div class="clear"></div>
@@ -58,14 +59,17 @@ export default {
     },
     planNorm() {
          this.$router.push({ name: 'plannorm', params: { planId: this.trackingData.planId }});
+    },
+    switchFormula() {        
+        const _this = this
+        _this.$emit('onSwitchPlanFormula', _this.trackingData.normId)
     }
   },
   computed: {
     tranckPeriod() {
         const startPeriod = this.trackingData.startPeriod.toString();
         const endPeriod = this.trackingData.endPeriod.toString();
-        const periodNameStr = startPeriod.substr(startPeriod.length - 3,3) + '期-' + endPeriod.substr(endPeriod.length - 3,3) + '期';
-        
+        const periodNameStr = startPeriod.substr(startPeriod.length - 3,3) + '期-' + endPeriod.substr(endPeriod.length - 3,3) + '期';        
         return periodNameStr;
     },
     predictType() {
@@ -191,11 +195,11 @@ export default {
 
 .trank-row .trank-second-right {
     float: right;
-    margin-right: 15px;
+    margin-right: 5px;
 }
 
 .trank-row .trank-second-right span {
-    width :50px;
+    width :38px;
     height :20px;
     display :inline-block;
     line-height :20px;
@@ -203,8 +207,8 @@ export default {
     border-radius :20px;
     background-color :#EA0000;
     text-align :center;
-    margin-left :5px;
-    font-size :12px;
+    margin-left :2px;
+    font-size :10px;
     color :#fff;
 }
 .trank-row .trank-second-right span:active {
