@@ -37,7 +37,8 @@ export default {
       finalLotteryData: {},
       nextLotteryTime: null,
       isRunning: false,
-      isShowHour: true
+      isShowHour: true,
+      fetchLotteryData: 0
     };
   },
   components: {
@@ -45,6 +46,7 @@ export default {
     Clocker
   },
   created() {
+    this.fetchLotteryData = 0
     this.getFinalLotteryData(false);
     // document.addEventListener('visibilitychange',this.onVisibilityChange)
   },
@@ -60,10 +62,14 @@ export default {
             this.timeDiff(result.nextLotteryTime);
             this.$emit("lotterydata", true);
             this.isRunning = false;
-           
+            this.fetchLotteryData = 0
           } else {
             this.isRunning = true;
             this.isShowHour = false;
+            if (this.fetchLotteryData === 0) {
+              this.$emit("lotterydata", true);
+            }
+            this.fetchLotteryData += 1
             setTimeout(this.getFinalLotteryData, 2000, isNew);
           }
         });
