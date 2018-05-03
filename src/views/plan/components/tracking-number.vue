@@ -5,17 +5,20 @@
         <predict-data-item v-for="(item,index) in predictDatas" :trackingData="item"  v-on:onSwitchPlanFormula="onSwitchPlanFormula"  :key="index">         
         </predict-data-item>
       </div>
+            <divider>友情提示: 彩市有风险，投资需理性</divider>
       </scroller>
+
     </div>
 </template>
 <script>
-import { Scroller } from "vux";
+import { Scroller,Divider } from "vux";
 import PredictDataItem from "@/components/predict-data-item";
 
 export default {
   components: {
     Scroller,
-    PredictDataItem
+    PredictDataItem,
+    Divider
   },
   props: {
     predictDatas: {
@@ -48,5 +51,11 @@ export default {
   position: fixed;
   top: 224px;
   overflow: hidden;
+}
+
+.vux-divider {
+    font-size: 12px !important;
+    padding-top: 10px;
+
 }
 </style>

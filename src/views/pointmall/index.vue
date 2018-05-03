@@ -137,7 +137,7 @@ export default {
       this.shareApp.show = true
     },
     pointPurchase() {
-      this.$vux.alert.show({title:'积分兑换',content:'感谢您的支持,下个版本即将来袭,我马上就可以和您见面了哦'})
+      this.$vux.alert.show({title:'积分兑换',content:'感谢您的支持,我马上驾到,下个版本可以和您见面'})
     }
   }
 };

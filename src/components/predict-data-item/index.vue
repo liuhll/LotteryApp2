@@ -95,7 +95,7 @@ export default {
 .track-plan-wrapper {
     height: auto!important;
     text-align: left;
-    padding: 5px;
+    padding: 4px;
     display: block !important;
 }
 .trank-row {
@@ -112,9 +112,9 @@ export default {
 }
 .trank-row .plan-name span {
     margin-left :3px;
-    font-size: 14px;
-    font-weight :00;
-    line-height :14px;
+    font-size: 13px;
+    font-weight :444;
+    line-height :13px;
     vertical-align :middle;
 }
 .trank-row .track-list-wrapper span {
@@ -219,4 +219,6 @@ export default {
 .clear {
     clear: both;
 }
+
+
 </style>

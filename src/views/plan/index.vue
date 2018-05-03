@@ -39,7 +39,16 @@ export default {
           this.$vux.loading.hide();
         })
         .catch(error => {
-          this.$vux.alert.show(error.message);
+           let _this = this;
+          _this.$vux.loading.hide();
+          _this.$vux.confirm.show({
+            title: "购买授权",
+            content: error.message,
+            onConfirm() {
+              _this.$router.push({ path: "/purchase" });
+            },
+            onCancel() {}
+          });
         });
     },
     switchFormula() {
