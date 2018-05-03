@@ -37,7 +37,7 @@ export default {
       const _this = this;
        this.$vux.confirm.show({
         title: '是否确定切换公式?',
-        content: '当前彩票数据引擎会根据您设定的计划指标选择最优公式重新计算追号数据',
+        content: '当前彩票数据引擎会根据您设定的计划指标选择最优公式重新计算您所选的所有计划追号数据',
         onConfirm() {            
           _this.$emit('switchFormula');
          },

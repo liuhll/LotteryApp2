@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
 
-export function getIdentifyCode1 (account) {
+export function getIdentifyCode1(account) {
     return request({
         url: '/v1/message/identifycode1',
         method: 'GET',
@@ -9,7 +9,7 @@ export function getIdentifyCode1 (account) {
     });
 }
 
-export function getIdentifyCode2 (account) {
+export function getIdentifyCode2(account) {
     return request({
         url: '/v1/message/identifycode2',
         method: 'GET',
@@ -67,8 +67,15 @@ export function onlineHelp(lotteryCode) {
 
 export function getAppInfo(platform) {
     return request({
-      url: '/v1/operation/appinfo',
-      method: 'GET',
-      params: platform
+        url: '/v1/operation/appinfo',
+        method: 'GET',
+        params: platform
+    })
+}
+
+export function getCustomService() {
+    return request({
+        url: '/v1/operation/customservice',
+        method: 'GET'
     })
 }

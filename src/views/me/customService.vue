@@ -1,13 +1,13 @@
 <template>
   <group title="在线客服">       
-      <cell-box>
-        QQ: 1029765111
+      <cell-box v-if="customService.qq">
+        QQ: {{customService.qq}}
       </cell-box>
-      <cell-box>
-        QQ群: 1029765111
+      <cell-box  v-if="customService.qqGroup">
+        QQ群: {{customService.qqGroup}}
       </cell-box>
-       <cell-box>
-        微信: clmeng-service
+       <cell-box v-if="customService.wechat">
+        微信: {{customService.wechat}}
        </cell-box>
        <cell-box class="memo"><strong>备注:</strong> 请您在添加客服时，备注上您的订单号，否则我们不会通过您的申请。</cell-box>
   </group>
@@ -19,6 +19,19 @@ export default {
     Group,
     CellBox
   },
+  data() {
+    return {
+      customService: {}
+    }
+  },
+  created() {
+    this.$vux.loading.show("加载中...")
+       this.$store.dispatch("GetCustomService").then(result => {
+          this.customService = result
+          this.$vux.loading.hide()
+     
+      });
+  }
 }
 </script>
 
