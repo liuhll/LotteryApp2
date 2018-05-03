@@ -11,7 +11,7 @@
       <grid-item label="积分记录"  @on-item-click="getMyPointRecords">
        <img slot="icon" src="../../assets/images/pointmall/pointrecord.svg">
       </grid-item>
-      <grid-item label="积分兑换">
+      <grid-item label="积分兑换" @on-item-click="pointPurchase">
        <img slot="icon" src="../../assets/images/pointmall/points.svg">
       </grid-item>  
       <grid-item label="活动与公告" @on-item-click="onActivity">
@@ -135,6 +135,9 @@ export default {
     },
     onShare() {
       this.shareApp.show = true
+    },
+    pointPurchase() {
+      this.$vux.alert.show({title:'积分兑换',content:'感谢您的支持,下个版本即将来袭,我马上就可以和您见面了哦'})
     }
   }
 };

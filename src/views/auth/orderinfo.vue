@@ -23,6 +23,7 @@ import {
   Checker,
   CheckerItem
 } from "vux";
+import { error } from 'util';
 
 export default {
   components: {
@@ -76,6 +77,11 @@ export default {
             name: "pay",
             params: { payinfo: result, orderNo: salesOrderNo.value }
         });           
+        }).catch(error => {
+          _this.$vux.alert.show({
+            title: '支付异常',
+            content: error.message
+          })
         });
     },
     orderItem(key) {
