@@ -81,7 +81,7 @@ export default {
          this.$vux.loading.hide() 
          this.$router.push({
             name: "orderinfo",
-            params: { orderNo: result.orderNo }
+            params: { orderNo: result.orderNo, sellType: 0 }
         });    
       })
     }

@@ -39,16 +39,7 @@ export default {
           this.$vux.loading.hide();
         })
         .catch(error => {
-           let _this = this;
-          _this.$vux.loading.hide();
-          _this.$vux.confirm.show({
-            title: "购买授权",
-            content: error.message,
-            onConfirm() {
-              _this.$router.push({ path: "/purchase" });
-            },
-            onCancel() {}
-          });
+          this.$vux.alert.show(error.message);
         });
     },
     switchFormula() {
@@ -73,25 +64,30 @@ export default {
         });
     },
     onSwitchPlanFormula(normId) {
-      const _this = this      
-        _this.$vux.loading.show("计算中...");                
-        _this.$store
-          .dispatch("UpdatePredictData", { normId: normId })
-          .then(result => {    
-            _this.predictdatas(false)
-            _this.$vux.loading.hide()
-            // _this.$vux.alert.show({
-            //   title: '切换公式',
-            //   content: result
-            // })
-          })
-          .catch(error => {
-            _this.$vux.loading.hide();
-            _this.$vux.alert.show({
-              title: '切换公式错误',
-              content: error.message
-            })
+      const _this = this;
+      _this.$vux.loading.show("计算中...");
+      _this.$store
+        .dispatch("UpdatePredictData", { normId: normId })
+        .then(result => {
+          _this.predictdatas(false);
+          _this.$vux.loading.hide();
+          // _this.$vux.alert.show({
+          //   title: '切换公式',
+          //   content: result
+          // })
+        })
+        .catch(error => {
+          let _this = this;
+          _this.$vux.loading.hide();
+          _this.$vux.confirm.show({
+            title: "购买授权",
+            content: error.message,
+            onConfirm() {
+              _this.$router.push({ path: "/purchase" });
+            },
+            onCancel() {}
           });
+        });
     }
   }
 };

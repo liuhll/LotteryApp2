@@ -6,6 +6,7 @@ import {
     goodsList,
     order,
     pay,
+    pointPay,
     getOrder
 
 } from '@/api/operation'
@@ -113,6 +114,20 @@ const operationData = {
         Pay({}, payinfo) {
             return new Promise((resolve, reject) => {
                 pay(payinfo).then(response => {
+                    if (response.success) {
+                        const data = response.result;
+                        resolve(data);
+                    } else {
+                        reject(response.error)
+                    }
+                }).catch(error => {
+                    reject(error);
+                })
+            });
+        },
+        PointPay({}, payinfo) {
+            return new Promise((resolve, reject) => {
+                pointPay(payinfo).then(response => {
                     if (response.success) {
                         const data = response.result;
                         resolve(data);

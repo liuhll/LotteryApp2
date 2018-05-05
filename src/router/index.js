@@ -17,6 +17,7 @@ const constantRouterMap = [{
         name: 'appmain',
         redirect: 'plan',
         children: [{
+                name: 'plan',
                 path: 'plan',
                 component: () =>
                     import ('@/views/plan/index'),
@@ -271,6 +272,17 @@ const constantRouterMap = [{
                     showtabbar: false,
                     showBack: true,
                     more: { headerTitle: '在线支付' }
+                }
+            },
+            {
+                name: 'point-auth',
+                path: 'point-auth',
+                component: () =>
+                    import ('@/views/pointmall/point-auth'),
+                meta: {
+                    showtabbar: false,
+                    showBack: true,
+                    more: { headerTitle: '积分兑换授权' }
                 }
             }
         ]

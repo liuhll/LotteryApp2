@@ -38,6 +38,7 @@ import { Grid, GridItem, Divider, Actionsheet } from "vux";
 import Activity from "./components/activity";
 import PointsInfo from "./components/points-info"
 import PointsRecord from "./components/points-record"
+import { toDecimal2 } from "@/utils/numberUtil";
 
 export default {
   components: {
@@ -137,7 +138,43 @@ export default {
       this.shareApp.show = true
     },
     pointPurchase() {
-      this.$vux.alert.show({title:'积分兑换',content:'感谢您的支持,我马上驾到,下个版本可以和您见面'})
+      const _this = this;
+      _this.$store.dispatch("GetGoodsList", { sellType: 1 }).then(result => {
+      if (result.length === 0 || result == null) {
+        _this.$vux.alert.show({
+          title: '积分兑换',
+          content: '当前没有合适的积分版本可以兑换，更多积分活动，即将来临,敬请期待'
+        })
+        return
+      } else {
+        let goodsList = []
+        result.forEach(item => {
+        let desc = "";
+        if (item.discount !== 1) {
+          desc =
+            "原价:" +
+            toDecimal2(item.originalPrice) +
+            "  折扣:" +
+            item.discount +
+            "  现价:" +
+            item.sellPrice
+        } else {
+          desc = "售价:" +item.sellPrice + '点积分';
+        }
+         goodsList.push({
+          key: item.goodsId,
+          value: item.goodsName ,
+          inlineDesc: desc,
+          discount: item.discount,
+          count: item.count,
+          unitPrice: item.unitPrice
+        });
+      });
+       _this.$router.push({ name: 'point-auth',params: {list: goodsList } })
+      }
+     
+    });
+     
     }
   }
 };

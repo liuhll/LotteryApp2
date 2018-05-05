@@ -59,3 +59,11 @@ export function pay(payinfo) {
         data: payinfo
     });
 }
+
+export function pointPay(payinfo) {
+    return request({
+        url: '/v1/sell/pointpay',
+        method: 'POST',
+        data: payinfo
+    });
+}
