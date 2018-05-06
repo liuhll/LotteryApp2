@@ -67,3 +67,10 @@ export function pointPay(payinfo) {
         data: payinfo
     });
 }
+
+export function wechatConfig() {
+    return request({
+        url: '/v1/operation/wechatconfig',
+        method: 'GET'
+    });
+}
